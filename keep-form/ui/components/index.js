@@ -3,6 +3,7 @@ import Radio from './radio/index'
 import Checkbox from './checkbox/index'
 import Select from './select/index'
 import Text from './text/index'
+import Switch from './switch/index'
 import { TYPE } from '../../core/types'
 
 export default {
@@ -10,5 +11,6 @@ export default {
   [TYPE.RADIO]: Radio,
   [TYPE.CHECKBOX]: Checkbox,
   [TYPE.SELECT]: Select,
-  [TYPE.TEXT]: Text
+  [TYPE.TEXT]: Text,
+  [TYPE.SWITCH]: Switch
 }

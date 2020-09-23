@@ -5,6 +5,12 @@ let list = [home, {
   name: 'example',
   meta: {},
   component: () => import('_app/pages/example')
+},
+{
+  path: '/switch',
+  name: 'switch',
+  meta: {},
+  component: () => import('_app/pages/example/switch')
 }]
 
 export default list

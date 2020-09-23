@@ -7,11 +7,22 @@
         type="k-input" 
         field="name1" 
         label="name1"
-        
-        :ui="{ $on: { 'on-change': (e) => handler(e) } }"
+        :ui="{
+          disabled:!form.switch,
+          $on: { 'on-change': (e) => handler(e) } 
+        }"
         :rules="{ required: true, message: '11edasrbg1' }"
       >
         <Icon slot="prefix" type="md-home" />
+      </keep-field>
+      <keep-field
+        :value="form.switch"
+        type='k-switch'
+        field="switch"
+        label="是否禁用name1"
+      >
+        <Icon slot="open" type="md-checkmark"></Icon>
+        <template v-slot:close>禁用</template>
       </keep-field>
     </keep-form>
   </div>
@@ -93,12 +104,25 @@ export default {
             clearable: true,
             $data: { 'city': [{ id: 0, name: 'beijing' }, { id: 1, name: 'tianjin'}, { id: 2, name: 'shanghai' }], 'country': [{ id: 3, name: 'china' }] },
           }
+        },{
+          type: KeepForm.TYPE.SWITCH,
+          field: 'switch1',
+          label: 'switch',
+          layout: {
+            span: '12'
+          },
+          rules: {
+            required: true,
+            message: '请选择switch'
+          }
         }]
       },
       form: {
         name: '111',
         age: '18岁',
         name1: '222',
+        switch:true,
+        switch1:false,
         sex: '',
         favorite: [],
         city: ''

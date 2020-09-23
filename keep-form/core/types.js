@@ -3,5 +3,6 @@ export const TYPE = {
   RADIO: 'k-radio',
   CHECKBOX: 'k-checkbox',
   SELECT: 'k-select',
-  TEXT: 'k-text'
+  TEXT: 'k-text',
+  SWITCH: 'k-switch'
 }
