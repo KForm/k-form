@@ -1,0 +1,16 @@
+type:
+  - app # 目前两种类型 app， lib
+apps:
+  - name: bananaName # banana项目名称
+    target: ./keepva.tar # 构建文件的目标名称，和banana中的配置相同
+    script: ./build.sh # 构建的脚本，可以带参数
+    sonar: Need # 构建前进行sonar检查
+    lint: Need # 构建前进行lint检查
+    scan: Need # 构建后上报资源信息
+    deps: Need # 构建后上报依赖信息
+
+notify:
+  wechatHook: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=bbfe5c4f-e30f-4b73-9c4f-ba6842c22deb
+  # 构建结果通知的企业微信机器人地址，建议都用自己部门的
+  diff: Always # diff 是否通知
+  repo: Always # 构建结束是否通知
