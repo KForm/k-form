@@ -21,8 +21,8 @@
         field="switch"
         label="是否禁用用户2"
       >
-        <template v-slot:open>启用</template>
-        <template v-slot:close>禁用</template>
+        <Icon slot="open" type="md-checkmark"></Icon>
+        <Icon slot="close" type="md-close"></Icon>
       </keep-field>
     </keep-form>
   </div>
@@ -87,11 +87,11 @@ export default {
               $slots:[
                 {
                   name:'open',
-                  render:h => <span slot={'open'}>启用</span>
+                  render:h => <Icon slot="open" type="md-checkmark" />
                 },
                 {
                   name:'close',
-                  render:h => <span slot={'close'}>禁用</span>
+                  render:h => <Icon slot="close" type="md-close" />
                 }
               ]
             }
