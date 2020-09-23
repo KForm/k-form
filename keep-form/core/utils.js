@@ -37,7 +37,7 @@ export const mapSchemaRules2UI = (ctx, schema) => {
 export const slotsWrap = (ctx, slots) => {
   return Object.keys(slots).map(item => ({
     name: item,
-    render: () => ctx.$slots[item][0]
+    render: () => ctx.$slots[item]
   }))
 }
 
