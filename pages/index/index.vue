@@ -25,6 +25,8 @@
         <template v-slot:close>禁用</template>
       </keep-field>
     </keep-form>
+    <datePicker/>
+    <KSwitch/>
   </div>
 </template>
 
@@ -32,11 +34,15 @@
 
 import { preRenderEvent } from '@vuecore/libs/utils'
 import KeepForm from '_app/keep-form'
+import datePicker from '../example/date-picker'
+import KSwitch from '../example/switch'
 export default {
   name: 'Index',
   components: {
     KeepForm: KeepForm.Form,
-    KeepField: KeepForm.Field
+    KeepField: KeepForm.Field,
+    datePicker,
+    KSwitch
   },
   data () {
     return {
@@ -155,6 +161,7 @@ export default {
   padding: 20px;
   box-sizing: border-box;
   color: #333;
+  overflow: hidden;
   a {
     color: skyblue;
   }
