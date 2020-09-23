@@ -5,6 +5,11 @@ let list = [home, {
   name: 'example',
   meta: {},
   component: () => import('_app/pages/example')
+}, {
+  path: '/auto-complete',
+  name: 'auto-complete',
+  meta: {},
+  component: () => import('_app/pages/auto-complete')
 },
 {
   path: '/switch',

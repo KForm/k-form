@@ -37,7 +37,7 @@
   }
 }]
 
-<KeepField 
+<keep-field 
   :value="form.name" 
   :type="KeepForm.TYPE.SWITCH" 
   field="switch" 
@@ -48,5 +48,5 @@
 >
   <template v-slot:open>开</template>
   <template v-slot:close>关</template>
-</KeepField>
+</keep-field>
 ```

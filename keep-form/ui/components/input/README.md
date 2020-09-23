@@ -37,7 +37,7 @@
   }
 }]
 
-<KeepField 
+<keep-field 
   :value="form.name" 
   :type="KeepForm.TYPE.INPUT" 
   field="name" 
@@ -45,5 +45,5 @@
   :ui="{ type: 'password', $on: { 'on-change': (e) => handler(e) } }"
 >
   <Icon slot="prefix" type="md-home" />
-</KeepField>
+</keep-field>
 ```
