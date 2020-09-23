@@ -4,5 +4,6 @@ export const TYPE = {
   CHECKBOX: 'k-checkbox',
   SELECT: 'k-select',
   AUTO_COMPLETE: 'k-auto-complete',
-  TEXT: 'k-text'
+  TEXT: 'k-text',
+  SWITCH: 'k-switch'
 }

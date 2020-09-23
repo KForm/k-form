@@ -27,6 +27,7 @@ export const mapSchemaRules2UI = (ctx, schema) => {
     fields = []
   }
   fields.map(item => {
+    if (!item.componentOptions)return
     const { field, rules } = item.componentOptions.propsData
     rules && (rulesSet[field] = rules)
     return

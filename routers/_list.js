@@ -10,6 +10,12 @@ let list = [home, {
   name: 'auto-complete',
   meta: {},
   component: () => import('_app/pages/auto-complete')
+},
+{
+  path: '/switch',
+  name: 'switch',
+  meta: {},
+  component: () => import('_app/pages/example/switch')
 }]
 
 export default list
