@@ -16,6 +16,8 @@
 - [x] rate
 - [ ] upload
 - [x] colorpicker
+- [ ] transfer 暂时不做
+- [ ] 自定义表单组件
 - [ ] 表单模式（datepicker、timepicker、cascader、transder、upload 未做）
 - [ ] 表单联动
 - [ ] 复杂布局
