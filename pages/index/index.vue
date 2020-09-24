@@ -75,7 +75,7 @@ export default {
             icon: 'ios-contact',
             $slots: [{
               name: 'prefix',
-              render: h => <Icon type = {'md-home'} slot = {'prefix'} />
+              render: h => <Icon type = {'md-home'} slot = {'prefix'} on-click={(e) => this.handler(e)} />
             }],
             $on: {
               'on-focus': () => console.log('im focus'),

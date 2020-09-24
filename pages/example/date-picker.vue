@@ -94,7 +94,7 @@ export default {
                     return (
                       <a href="javascript:void(0)" onClick={this.handleDate2Open}>
                         <Icon type="ios-clock-outline"></Icon>
-                        <template>{this.form.date2 === ''? 'select date' :this.form.date2}</template>
+                        <p>{this.form.date2 === ''? 'select date' :this.form.date2}</p>
                       </a>
                     )
                   }
@@ -152,10 +152,10 @@ export default {
     },
     handleDate2Open(){
       console.log('click')
-      this.form.date2Open = !this.form.date2Open
+      this.date2Open = !this.date2Open
     },
     handleTimeClick(){
-
+      console.log(111)
     }
   }
 }
