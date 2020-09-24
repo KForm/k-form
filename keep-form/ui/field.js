@@ -14,7 +14,7 @@ export default {
       default: '',
     },
     value: {
-      type: [String, Number, Array, Boolean],
+      type: [String, Number, Array, Boolean, Date],
       default: ''
     },
     label: {

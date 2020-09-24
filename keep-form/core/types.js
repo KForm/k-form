@@ -6,5 +6,6 @@ export const TYPE = {
   AUTO_COMPLETE: 'k-auto-complete',
   TEXT: 'k-text',
   SWITCH: 'k-switch',
-  DATEPICKER:'k-date-picker'
+  DATEPICKER:'k-date-picker',
+  TIMEPICKER:'k-time-picker'
 }

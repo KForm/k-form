@@ -6,6 +6,7 @@ import AutoComplete from './auto-complete/index'
 import Text from './text/index'
 import Switch from './switch/index'
 import DatePicker from './datePicker/index'
+import TimePicker from './timePicker/index'
 import { TYPE } from '../../core/types'
 
 export default {
@@ -16,5 +17,6 @@ export default {
   [TYPE.AUTO_COMPLETE]: AutoComplete,
   [TYPE.TEXT]: Text,
   [TYPE.SWITCH]: Switch,
-  [TYPE.DATEPICKER]:DatePicker
+  [TYPE.DATEPICKER]:DatePicker,
+  [TYPE.TIMEPICKER]:TimePicker
 }

@@ -66,6 +66,9 @@ export default {
               disabled:!this.form.switch1,
               type: 'number',
               icon: 'ios-contact',
+              layout:{
+                span:24
+              },
               $slots: [{
                 name: 'prefix',
                 render: h => <Icon type = {'md-home'} slot = {'prefix'} />
@@ -83,6 +86,9 @@ export default {
             type: KeepForm.TYPE.SWITCH,
             field: 'switch1',
             label: '是否禁用用户1',
+            layout:{
+              span:24
+            },
             ui:{
               $slots:[
                 {
