@@ -9,13 +9,28 @@ let list = [home, {
   path: '/auto-complete',
   name: 'auto-complete',
   meta: {},
-  component: () => import('_app/pages/auto-complete')
+  component: () => import('_app/pages/example/auto-complete')
 },
 {
   path: '/switch',
   name: 'switch',
   meta: {},
   component: () => import('_app/pages/example/switch')
+}, {
+  path: '/input-number',
+  name: 'input-number',
+  meta: {},
+  component: () => import('_app/pages/example/input-number')
+}, {
+  path: '/rate',
+  name: 'rate',
+  meta: {},
+  component: () => import('_app/pages/example/rate')
+}, {
+  path: '/color-picker',
+  name: 'color-picker',
+  meta: {},
+  component: () => import('_app/pages/example/color-picker')
 }]
 
 export default list

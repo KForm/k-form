@@ -27,6 +27,11 @@
     </keep-form>
     <datePicker/>
     <KSwitch/>
+    <KAutoComplete/>
+    <KSlider/>
+    <KInputNumber/>
+    <KRate/>
+    <KColorPicker/>
   </div>
 </template>
 
@@ -36,13 +41,23 @@ import { preRenderEvent } from '@vuecore/libs/utils'
 import KeepForm from '_app/keep-form'
 import datePicker from '../example/date-picker'
 import KSwitch from '../example/switch'
+import KAutoComplete from '../example/auto-complete'
+import KSlider from '../example/slider'
+import KInputNumber from '../example/input-number'
+import KRate from '../example/rate'
+import KColorPicker from '../example/color-picker'
 export default {
   name: 'Index',
   components: {
     KeepForm: KeepForm.Form,
     KeepField: KeepForm.Field,
     datePicker,
-    KSwitch
+    KSwitch,
+    KAutoComplete,
+    KSlider,
+    KInputNumber,
+    KRate,
+    KColorPicker
   },
   data () {
     return {
