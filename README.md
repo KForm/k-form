@@ -1,5 +1,28 @@
 ## KeepForm 动态表单
 
+## todolist
+
+- [x] input
+- [x] radio
+- [x] checkbox
+- [x] switch
+- [x] select
+- [x] autocomplete
+- [x] slider
+- [x] datepicker
+- [x] timepicker
+- [ ] cascader
+- [ ] transfer
+- [x] inputnumber
+- [x] rate
+- [ ] upload
+- [x] colorpicker
+- [ ] 表单模式（datepicker、timepicker、cascader、transder、upload 未做）
+- [ ] 表单联动
+- [ ] 复杂布局
+- [ ] 性能优化
+- [ ] 代码梳理
+
 基于 iview 实现的表单组件，支持布局、校验、配置化渲染等功能。
 
 ### Form 组件
