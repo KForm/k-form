@@ -27,6 +27,11 @@
     </keep-form>
     <datePicker/>
     <KSwitch/>
+    <KAutoComplete/>
+    <KSlider/>
+    <KInputNumber/>
+    <KRate/>
+    <KColorPicker/>
   </div>
 </template>
 
@@ -36,13 +41,23 @@ import { preRenderEvent } from '@vuecore/libs/utils'
 import KeepForm from '_app/keep-form'
 import datePicker from '../example/date-picker'
 import KSwitch from '../example/switch'
+import KAutoComplete from '../example/auto-complete'
+import KSlider from '../example/slider'
+import KInputNumber from '../example/input-number'
+import KRate from '../example/rate'
+import KColorPicker from '../example/color-picker'
 export default {
   name: 'Index',
   components: {
     KeepForm: KeepForm.Form,
     KeepField: KeepForm.Field,
     datePicker,
-    KSwitch
+    KSwitch,
+    KAutoComplete,
+    KSlider,
+    KInputNumber,
+    KRate,
+    KColorPicker
   },
   data () {
     return {
@@ -101,7 +116,7 @@ export default {
           ui: {
             // render支持值和函数，务必使用 function 而不是箭头函数，否则获取不到this
             $data: [{id: 0, name: '苹果', render: function() { return <span><Icon type="md-home"/><span>{ this.name }</span></span>}}, {id: 1, name: '香蕉'}, {id: 2, name: '葡萄'}],
-          }
+          },
         }, {
           type: KeepForm.TYPE.SELECT,
           field: 'city',
@@ -109,7 +124,8 @@ export default {
           ui: {
             clearable: true,
             $data: { 'city': [{ id: 0, name: 'beijing' }, { id: 1, name: 'tianjin'}, { id: 2, name: 'shanghai' }], 'country': [{ id: 3, name: 'china' }] },
-          }
+            // $data: [{ id: 0, name: 'beijing' }, { id: 1, name: 'tianjin'}, { id: 2, name: 'shanghai' }]
+          },
         },{
           type: KeepForm.TYPE.SWITCH,
           field: 'switch1',
@@ -129,9 +145,9 @@ export default {
         name1: '222',
         switch:true,
         switch1:false,
-        sex: '',
-        favorite: [],
-        city: ''
+        sex: 1,
+        favorite: [1, 2],
+        city: 2
       }
     }
   },

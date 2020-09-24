@@ -1,19 +1,18 @@
 import { TYPE } from '../../../core/types'
-import { isBoolean } from '../../../core/utils'
 
 export default {
-  name: TYPE.SWITCH,
+  name: TYPE.RATE,
   inheritAttrs: false,
   render(h) {
-    const { editable, slots, value } = this.$attrs
+    const { editable, disabled, slots } = this.$attrs
     return (
-      editable ? <i-switch {...{ props: this.$attrs, on: this.$listeners}}>
+      <Rate {...{ props: { ...this.$attrs, disabled: !editable ? true : disabled }, on: this.$listeners}} >
         { Object.keys(slots).map(item => (
           <template slot = { slots[item].name } >
             { slots[item].render(h) }
           </template>
         )) }
-      </i-switch> : <p>{ isBoolean(value) ? value ? '是' : '否' : '' }</p>
+      </Rate>
     )
   }
 }

@@ -7,3 +7,5 @@ export const _schema = {
   fields: [],
   layout: _layout
 }
+
+export const _editable = true

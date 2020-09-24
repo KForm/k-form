@@ -52,4 +52,6 @@ export const isFunction = v => getTypeString(v) === '[object Function]'
 
 export const isArray = v => getTypeString(v) === '[object Array]'
 
+export const isBoolean = v => typeof v === 'boolean'
+
 export const isMultipleArr = v => isArray(v) ? v.every(e => isArray(e)) : false

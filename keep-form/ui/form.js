@@ -1,7 +1,7 @@
 import BaseForm from '../core/form'
 import Field from './field'
-import { mapSchemaRules2UI } from '../core/utils'
-import { refName, _schema } from '../core/config'
+import { mapSchemaRules2UI, isBoolean } from '../core/utils'
+import { refName, _schema, _editable } from '../core/config'
 // import render from './render'
 
 let kf = new BaseForm(this)
@@ -38,7 +38,7 @@ export default {
     }
   },
   methods: {
-    renderField(field, index) {
+    renderField(form, field, index) {
       return (
         <Field
           ref = { field.field }
@@ -49,6 +49,7 @@ export default {
           ui = { field.ui }
           layout = { field.layout }
           rules = { field.rules }
+          editable = { isBoolean(field.editable) ? field.editable : isBoolean(form.editable) ? form.editable : _editable }
         />
       )
     },
@@ -66,7 +67,7 @@ export default {
     return (
       <div class="form-wrap">
         <Form ref={ refName } { ...{ props: { model: this.model, rules: this.formRules, ...this.schema.form } } } on-change={ e => console.log(e) }>
-          { this.schema.fields.map((item) => this.renderField(item)) }
+          { this.schema.fields.map((item) => this.renderField(this.schema.form, item)) }
           { this.$slots.default }
         </Form>
       </div>
