@@ -12,7 +12,6 @@
 - [ ] datepicker
 - [ ] timepicker
 - [ ] cascader
-- [ ] transfer
 - [x] inputnumber
 - [x] rate
 - [ ] upload
