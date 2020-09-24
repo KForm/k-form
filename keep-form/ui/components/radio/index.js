@@ -1,13 +1,15 @@
 import { TYPE } from '../../../core/types'
+import { translateId2Name } from '../../../core/transfer'
 
 export default {
   name: TYPE.RADIO,
   inheritAttrs: false,
   render(h) {
+    const { $data, value, editable } = this.$attrs
     return (
-      <RadioGroup {...{ props: this.$attrs, on: this.$listeners}} >
-        { this.$attrs.$data.map(item => <Radio key = { item.id } label = { item.id } disabled = { item.disabled } true-value = { 'Number' } false-value = { 'Number' }>{ item.name }</Radio>) }
-      </RadioGroup>
+      editable ? <RadioGroup {...{ props: this.$attrs, on: this.$listeners}} >
+        { $data.map(item => <Radio key = { item.id } label = { item.id } disabled = { item.disabled } true-value = { 'Number' } false-value = { 'Number' }>{ item.name }</Radio>) }
+      </RadioGroup> : <p>{ translateId2Name($data, value) }</p>
     )
   }
 }

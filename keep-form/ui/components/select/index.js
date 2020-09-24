@@ -1,5 +1,6 @@
 import { TYPE } from '../../../core/types'
 import { isFunction, isObject } from '../../../core/utils'
+import { translateId2Name, translateId2NameByGroup } from '../../../core/transfer'
 export default {
   name: TYPE.SELECT,
   inheritAttrs: false,
@@ -9,20 +10,21 @@ export default {
     }
   },
   render(h) {
+    const { $data, value, editable, field, slots, multiple } = this.$attrs
     return (
-      <Select {...{ props: this.$attrs, on: this.$listeners, ref: this.$attrs.field}} >
-        { isObject(this.$attrs.$data) ? 
-          Object.keys(this.$attrs.$data).map(group => 
-            <OptionGroup label = { group }>{ this.$attrs.$data[group].map(option => this.renderOptions(option)) }</OptionGroup>
+      editable ? <Select {...{ props: this.$attrs, on: this.$listeners, ref: field}} >
+        { isObject($data) ? 
+          Object.keys($data).map(group => 
+            <OptionGroup label = { group }>{ $data[group].map(option => this.renderOptions(option)) }</OptionGroup>
           ) :
-          this.$attrs.$data.map(option => this.renderOptions(option))
+          $data.map(option => this.renderOptions(option))
         }
-        { Object.keys(this.$attrs.slots).map(item => (
-          <template slot = { this.$attrs.slots[item].name } >
-            { this.$attrs.slots[item].render(h) }
+        { Object.keys(slots).map(item => (
+          <template slot = { slots[item].name } >
+            { slots[item].render(h) }
           </template>
         )) }
-      </Select>
+      </Select> : <p>{ isObject($data) ? translateId2NameByGroup($data, value, multiple) : translateId2Name($data, value, multiple) }</p>
     )
   }
 }

@@ -4,14 +4,15 @@ export default {
   name: TYPE.AUTO_COMPLETE,
   inheritAttrs: false,
   render(h) {
+    const { editable, slots, value } = this.$attrs
     return (
-      <AutoComplete {...{ props: this.$attrs, on: this.$listeners }}>
-        { Object.keys(this.$attrs.slots).map(item => (
-          <template slot = { this.$attrs.slots[item].name } >
-            { this.$attrs.slots[item].render(h) }
+      editable ? <AutoComplete {...{ props: this.$attrs, on: this.$listeners }}>
+        { Object.keys(slots).map(item => (
+          <template slot = { slots[item].name } >
+            { slots[item].render(h) }
           </template>
         )) }
-      </AutoComplete>
+      </AutoComplete> : <p>{ value }</p>
     )
   }
 }

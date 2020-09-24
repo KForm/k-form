@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       form: {
-        name: '',
+        name: 'Steve Job',
         name1: ''
       },
       dataSource: ['Steve Jobs', 'Stephen Gary Wozniak', 'Jonathan Paul Ive'],
@@ -43,7 +43,7 @@ export default {
           ui: {
             data: this.dataSource,
             'filter-method': this.filterMethod
-          }
+          },
         }]
       }
     }
