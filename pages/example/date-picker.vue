@@ -5,12 +5,28 @@
       <keep-field 
         :value="form.date1"
         type="k-date-picker" 
-        field="date1" 
-        label="选择日期" 
+        field="date1"
+        :editable="false"
+        label="选择1日期" 
+        :ui="{ 
+          format:'yyyy-MM-dd',
+          valueFormat:'yyyy-MM-dd hh:mm:ss',
+          $on:{
+            'on-change':(e)=>handleDate1Change(e),
+          }
+        }"
+      >
+      </keep-field>
+      <keep-field 
+        :value="form.date2"
+        type="k-date-picker" 
+        field="date2" 
+        :editable="false"
+        label="select date" 
         :ui="{ 
           open:date1Open,
           confirm:true,
-          format:'yyyy-MM-dd',
+          format:'YYYY-MM-DD',
           $on:{
             'on-change':(e)=>handleDate1Change(e),
             'on-clear':(e)=>handleDate1clear(e),
@@ -19,29 +35,10 @@
         }"
       >
         <a href="javascript:void(0)" @click="handleDate1Open">
-          <template v-if="form.date1 === ''">Select date</template>
-          <template v-else>{{ form.date1 }}</template>
-        </a>
-      </keep-field>
-      <keep-field
-        :value="form.time"
-        type="k-time-picker" 
-        field="date" 
-        label="时间" 
-        :layout="{
-          span:6
-        }"
-        :ui="{
-          open:timeOpen,
-          confirm:true,
-          type:'timerange',
-          $on: { 'on-change': (e) => handler(e) } 
-        }"
-        :rules="{ required: true, message: '请选择时间' }"
-      >
-        <a href="javascript:void(0)" @click="handleTimeClick">
-          <Icon type="ios-clock-outline"></Icon>
-          <template>Select time</template>
+          <!-- {{ form.date2 }}
+          <template v-if="form.date2 === ''">Select date</template>
+          <template v-else>111{{ form.date2 }}</template> -->
+          111
         </a>
       </keep-field>
     </keep-form>
@@ -59,30 +56,26 @@ export default {
   data () {
     return {
       form: {
-        date:'',
-        time:'',
-        date1:'',
-        date2:''
+        date1:'2020-09-12',
+        date2:'2020-09-12'
       },
       date1Open:false,
-      date2Open:false,
-      timeOpen:false
+      date2Open:false
     }
   },
   computed:{
     schema(){
       return {
         form: {
-          labelWidth: 100
+          labelWidth: 200,
+          editable:false
         },
         fields: [
           {
             type: KeepForm.TYPE.DATEPICKER,
             field: 'date2',
-            label: 'date2',
-            layout:{
-              span:6
-            },
+            label: '选择日期',
+            editable:true,
             ui:{
               type:'date',
               open:this.date2Open,
@@ -92,41 +85,40 @@ export default {
                   name:'default',
                   render:()=>{
                     return (
-                      <a href="javascript:void(0)" onClick={this.handleDate2Open}>
+                      <a href="javascript:void(0)" on-click={(e) => this.handleDate2Open(e)}>
                         <Icon type="ios-clock-outline"></Icon>
-                        <p>{this.form.date2 === ''? 'select date' :this.form.date2}</p>
+                        <span>{!this.form.date2 ? 'select date' : this.form.date2}</span>
                       </a>
                     )
                   }
                 }
               ],
-              $on:[
-                {
-                  'on-ok': (e) =>{
-                    this.date2Open = false
-                  },
-                  'on-change': (date) => {
-                    this.form.date2 = date
-                  },
-                  'on-clear': (e) => {
-                    this.date2Open = false
-                  }
+              $on:{
+                'on-ok': (e) =>{
+                  this.date2Open = false
+                },
+                'on-change': e => {
+                  console.log(e)
+                  this.form.date2 = e
+                },
+                'on-clear': (e) => {
+                  this.date2Open = false
                 }
-              ]
+              }
             }
           },
           {
-            type: KeepForm.TYPE.TIMEPICKER,
-            field: 'date1',
-            label: '时间1',
-            layout:{
-              span:6
-            },
-            ui: {
-              type: 'time',
-              $on: {
-                'on-change': (e) => console.log(e)
-              }
+            type: KeepForm.TYPE.DATEPICKER,
+            field: 'date2',
+            label: 'select date 2',
+            ui:{
+              type:'date',
+              format:'yyyy-MM-dd',
+              $on:[
+                {
+                  'on-change': (date) =>console.log(date)
+                }
+              ]
             }
           }
         ]

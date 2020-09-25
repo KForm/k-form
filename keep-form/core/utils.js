@@ -41,7 +41,10 @@ export const slotsWrap = (ctx, slots) => {
     render: () => ctx.$slots[item]
   }))
 }
+export const _moment = function () {
 
+  return this
+}
 export const isNull = v => v === null || v === undefined
 
 export const getTypeString = v => Object.prototype.toString.call(v)
