@@ -23,7 +23,7 @@ export default {
         color1: ''
       },
       schema: {
-        form: { labelWidth: 200 },
+        form: { ui: { labelWidth: 200 } },
         fields: [{
           type: KeepForm.TYPE.COLOR_PICKER,
           field: 'color',

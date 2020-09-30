@@ -47,9 +47,10 @@ export default {
           label = { field.label }
           value = { this.model[field.field] }
           ui = { field.ui }
-          layout = { field.layout }
+          layout = { field.layout || form.layout }
           rules = { field.rules }
           editable = { isBoolean(field.editable) ? field.editable : isBoolean(form.editable) ? form.editable : _editable }
+          component = { field.component }
         />
       )
     },
@@ -58,6 +59,9 @@ export default {
     },
     $form() {
       return this.$refs[refName]
+    },
+    $setField(field, info) {
+      
     }
     // handleFieldValueChange(field, e) {
     //   this.$emit('input', {...this.value, ...{ [field]: e }})
@@ -66,7 +70,7 @@ export default {
   render(h) {
     return (
       <div class="form-wrap">
-        <Form ref={ refName } { ...{ props: { model: this.model, rules: this.formRules, ...this.schema.form } } } on-change={ e => console.log(e) }>
+        <Form ref={ refName } { ...{ props: { model: this.model, rules: this.formRules, ...this.schema.form.ui } } } on-change={ e => console.log(e) }>
           { this.schema.fields.map((item) => this.renderField(this.schema.form, item)) }
           { this.$slots.default }
         </Form>

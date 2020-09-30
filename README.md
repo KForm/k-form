@@ -17,7 +17,7 @@
 - [ ] upload
 - [x] colorpicker
 - [ ] transfer 暂时不做
-- [ ] 自定义表单组件
+- [x] 自定义表单组件
 - [ ] 表单模式（datepicker、timepicker、cascader、transder、upload 未做）
 - [ ] 表单联动
 - [ ] 复杂布局
@@ -50,9 +50,36 @@ components: {
 #### Schema
 
 ##### 1. form
-用于配置 iview.Form 的除 model、rules 外的全部属性，比如 labelWidth、inline、labelPosition 等。KeepForm 会自动收集 schema.fields 和 keepField 组件的校验规则自动生成完整表单 rules，不需要单独配置该属性。
+用于配置 iview.form 组件的属性以及表单全局配置
 
-`<keep-form :model="{ name: 'ee' }" :schema="{ form: { labelWidth: 200 } }">`
+1.1 ui：配置 iview.Form 的除 model、rules 外的全部属性，比如 labelWidth、inline、labelPosition 等。KeepForm 会自动收集 schema.fields 和 keepField 组件的校验规则自动生成完整表单 rules，不需要单独配置该属性。
+
+1.2 layout：表单整体布局。
+
+KeepForm 最终渲染出来的组件形式为：
+
+```
+<Form>
+  <Col>
+    <FormItem>
+      <Input/>
+    </FormItem>
+  </Col>
+  <Col>
+    <FormItem>
+      <RadioGroup>
+        <Radio/>
+      </RadioGroup>
+    </FormItem>
+  </Col>
+</Form>
+```
+
+layout 属性将生效于 Form 下的所有字段的 Col 组件中以完成全局布局，支持 Col 组件的全部属性。
+
+1.3 editable：表单全局模式，见“表单模式”一章。
+
+`<keep-form :model="{ name: 'ee' }" :schema="{ form: { ui: { labelWidth: 200 }, layout: { span: '24' } } }">`
 
 ##### 2. fields
 用于配置各个表单字段以生成表单组件。
@@ -119,28 +146,7 @@ components: {
 
 除了 name、id 外，$data 还支持其他配置，比如：disabled、render 等等，这些配置取决于组件的类型，请移步至各个组件文档中
 
-2.5 layout：表单整体布局。
-
-KeepForm 最终渲染出来的组件形式为：
-
-```
-<Form>
-  <Col>
-    <FormItem>
-      <Input/>
-    </FormItem>
-  </Col>
-  <Col>
-    <FormItem>
-      <RadioGroup>
-        <Radio/>
-      </RadioGroup>
-    </FormItem>
-  </Col>
-</Form>
-```
-
-Col 的属性在 layout 中完成配置，支持 Col 组件的全部属性
+2.5 layout：同 schema.form.layout，只作用于本字段的布局，优先级高于全局布局。
 
 ```
 <keep-form :model="{ favorite: [] }" :schema="{ fields: [{

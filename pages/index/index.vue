@@ -32,6 +32,8 @@
     <KInputNumber/>
     <KRate/>
     <KColorPicker/>
+    <!-- <KTransfer/> -->
+    <KWidget/>
   </div>
 </template>
 
@@ -46,6 +48,7 @@ import KSlider from '../example/slider'
 import KInputNumber from '../example/input-number'
 import KRate from '../example/rate'
 import KColorPicker from '../example/color-picker'
+import KWidget from '../example/widget'
 export default {
   name: 'Index',
   components: {
@@ -57,14 +60,15 @@ export default {
     KSlider,
     KInputNumber,
     KRate,
-    KColorPicker
+    KColorPicker,
+    KWidget
   },
   data () {
     return {
       aspectRadio: '16:9',
       schema: {
         form: {
-          labelWidth: 100
+          ui: { labelWidth: 100 }
         },
         fields: [{
           type: KeepForm.TYPE.INPUT,

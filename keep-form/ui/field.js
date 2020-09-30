@@ -35,6 +35,8 @@ export default {
     editable: {
       type: Boolean,
       default: _editable
+    },
+    component: {
     }
   },
   inject: ['formHanlder'],
@@ -56,7 +58,8 @@ export default {
               slots: this.$props.ui.$slots || slotsWrap(this, this.$slots),
               ...this.$props.ui,
               field: this.$props.field,
-              editable: this.$props.editable
+              editable: this.$props.editable,
+              component: this.$props.component
               // $field: () => this.$field()
             },
             on: {

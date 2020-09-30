@@ -67,7 +67,9 @@ export default {
     schema(){
       return {
         form: {
-          labelWidth: 200,
+          ui: {
+            labelWidth: 200,
+          },
           editable:false
         },
         fields: [

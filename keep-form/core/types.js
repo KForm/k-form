@@ -11,5 +11,6 @@ export const TYPE = {
   SLIDER: 'k-slider',
   INPUT_NUMBER: 'k-input-number',
   RATE: 'k-rate',
-  COLOR_PICKER: 'k-color-picker'
+  COLOR_PICKER: 'k-color-picker',
+  WIDGET: 'k-widget'
 }

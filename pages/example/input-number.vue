@@ -23,7 +23,7 @@ export default {
         age1: 50
       },
       schema: {
-        form: { labelWidth: 200 },
+        form: { ui: { labelWidth: 200 } },
         fields: [{
           type: KeepForm.TYPE.INPUT_NUMBER,
           field: 'age',

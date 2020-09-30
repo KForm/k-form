@@ -23,7 +23,7 @@ export default {
         range1: 90
       },
       schema: {
-        form: { labelWidth: 200 },
+        form: { ui: { labelWidth: 200 } },
         fields: [{
           type: KeepForm.TYPE.SLIDER,
           field: 'range',

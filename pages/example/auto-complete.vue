@@ -35,7 +35,7 @@ export default {
   computed: {
     schema() {
       return {
-        form: { labelWidth: 200 },
+        form: { ui: { labelWidth: 200 } },
         fields: [{
           type: KeepForm.TYPE.AUTO_COMPLETE,
           field: 'name',

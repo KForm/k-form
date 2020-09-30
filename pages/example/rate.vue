@@ -25,7 +25,7 @@ export default {
         rate1: 2
       },
       schema: {
-        form: { labelWidth: 200 },
+        form: { ui: { labelWidth: 200 } },
         fields: [{
           type: KeepForm.TYPE.RATE,
           field: 'rate',

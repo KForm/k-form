@@ -33,7 +33,7 @@ export default {
         favorite: []
       },
       schema: {
-        form: { labelWidth: 200 },
+        form: { ui: { labelWidth: 200 }, layout: { span: '24' } },
         fields: [{
           type: KeepForm.TYPE.INPUT,
           field: 'name',
@@ -71,7 +71,7 @@ export default {
     setTimeout(() => {
       // console.log(this.$refs.form.$field('name').focus())
       // this.$refs.name1.$field().focus()
-      this.$set(this.form, 'name1', 'qinchuan')
+      this.$setField(this.form, 'name1', 'qinchuan')
     }, 2000)
   },
   methods: {

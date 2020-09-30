@@ -11,6 +11,7 @@ import Slider from './slider/index'
 import InputNumber from './input-number/index'
 import Rate from './rate/index'
 import ColorPicker from './color-picker/index'
+import Widget from './widget'
 import { TYPE } from '../../core/types'
 
 export default {
@@ -26,5 +27,6 @@ export default {
   [TYPE.SLIDER]: Slider,
   [TYPE.INPUT_NUMBER]: InputNumber,
   [TYPE.RATE]: Rate,
-  [TYPE.COLOR_PICKER]: ColorPicker
+  [TYPE.COLOR_PICKER]: ColorPicker,
+  [TYPE.WIDGET]: Widget
 }
