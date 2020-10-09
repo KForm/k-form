@@ -6,40 +6,33 @@
         :value="form.date1"
         type="k-date-picker" 
         field="date1"
-        :editable="false"
-        label="选择1日期" 
+        label="日期选择1" 
         :ui="{ 
           format:'yyyy-MM-dd',
-          valueFormat:'yyyy-MM-dd hh:mm:ss',
+          open:date1Open,
+          confirm:true,
           $on:{
-            'on-change':(e)=>handleDate1Change(e),
+            'on-change':(date)=>form.date1 = date,
+            'on-ok':(e)=>date1Open = false,
+            'on-clear':(e)=>date1Open = false
           }
         }"
       >
+        <a href="javascript:void(0)" @click="handleDate1Open">
+          <Icon type="ios-calendar-outline"></Icon>
+          <template v-if="form.date1 === ''">Select date</template>
+          <template v-else>{{ form.date1 }}</template>
+        </a>
       </keep-field>
       <keep-field 
         :value="form.date2"
         type="k-date-picker" 
         field="date2" 
-        :editable="false"
-        label="select date" 
+        label="日期选择2" 
         :ui="{ 
-          open:date1Open,
-          confirm:true,
-          format:'YYYY-MM-DD',
-          $on:{
-            'on-change':(e)=>handleDate1Change(e),
-            'on-clear':(e)=>handleDate1clear(e),
-            'on-ok':(e)=>handleDate1Ok(e)
-          }
+          format:'yyyy-MM-dd'
         }"
       >
-        <a href="javascript:void(0)" @click="handleDate1Open">
-          <!-- {{ form.date2 }}
-          <template v-if="form.date2 === ''">Select date</template>
-          <template v-else>111{{ form.date2 }}</template> -->
-          111
-        </a>
       </keep-field>
     </keep-form>
   </div>
@@ -57,10 +50,13 @@ export default {
     return {
       form: {
         date1:'2020-09-12',
-        date2:'2020-09-12'
+        date2:'2020-09-12',
+        date3:'2020-09-21',
+        date4:''
       },
       date1Open:false,
-      date2Open:false
+      date3Open:false,
+      name: '2020-09-12'
     }
   },
   computed:{
@@ -70,26 +66,25 @@ export default {
           ui: {
             labelWidth: 200,
           },
-          editable:false
         },
         fields: [
           {
             type: KeepForm.TYPE.DATEPICKER,
-            field: 'date2',
-            label: '选择日期',
-            editable:true,
+            field: 'date3',
+            label: '日期选择3',
             ui:{
               type:'date',
-              open:this.date2Open,
+              open:this.date3Open,
+              format:'yyyy-MM-dd',
               confirm:true,
               $slots:[
                 {
                   name:'default',
                   render:()=>{
                     return (
-                      <a href="javascript:void(0)" on-click={(e) => this.handleDate2Open(e)}>
+                      <a href="javascript:void(0)" on-click={(e) => this.handleDate3Open(e)}>
                         <Icon type="ios-clock-outline"></Icon>
-                        <span>{!this.form.date2 ? 'select date' : this.form.date2}</span>
+                        <span>{ this.form.date3 === '' ? 'Select date' : this.form.date3 }</span>
                       </a>
                     )
                   }
@@ -97,22 +92,22 @@ export default {
               ],
               $on:{
                 'on-ok': (e) =>{
-                  this.date2Open = false
+                  this.date3Open = false
                 },
                 'on-change': e => {
-                  console.log(e)
-                  this.form.date2 = e
+                  // console.log('date3 change',e)
+                  this.form.date3 = e
                 },
                 'on-clear': (e) => {
-                  this.date2Open = false
+                  this.date3Open = false
                 }
               }
             }
           },
           {
             type: KeepForm.TYPE.DATEPICKER,
-            field: 'date2',
-            label: 'select date 2',
+            field: 'date4',
+            label: '日期选择4',
             ui:{
               type:'date',
               format:'yyyy-MM-dd',
@@ -128,28 +123,11 @@ export default {
     }
   },
   methods: {
-    handler(e) {
-      console.log(e)
-    },
     handleDate1Open(){
       this.date1Open = !this.date1Open
     },
-    handleDate1Change (date) {
-      console.log(date)
-      this.form.date1 = date
-    },
-    handleDate1clear () {
-      this.date1Open = false
-    },
-    handleDate1Ok () {
-      this.date1Open = false
-    },
-    handleDate2Open(){
-      console.log('click')
-      this.date2Open = !this.date2Open
-    },
-    handleTimeClick(){
-      console.log(111)
+    handleDate3Open(){
+      this.date3Open = !this.date3Open
     }
   }
 }

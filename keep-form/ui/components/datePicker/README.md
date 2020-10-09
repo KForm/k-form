@@ -1,4 +1,5 @@
 ### datePicker 组件
+format同时支持对value的格式化
 
 #### 属性
 

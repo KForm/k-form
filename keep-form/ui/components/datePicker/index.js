@@ -7,24 +7,33 @@ export default {
   computed:{
     format(){
       return (_d,_f)=>{
-        if(!_d) return
+        if(!_d) return ''
         if(!_f) return _d
         return new Kmoment(_d).format(_f)
       }
     }
   },
+  methods:{
+    // 由于日期对象转换字符串会造成undefined，所以在组件内覆盖input事件，单独转换
+    handleInput(e,format){
+      let v = e
+      if(Object.prototype.toString.call(e) === '[object Date]'){
+        v = this.format(e,format || 'yyyy-MM-dd')
+      }
+      this.$emit('input',v)
+    }
+  },
   render(h) {
-    console.log(this.$attrs.slots)
-    const { valueFormat,value,editable} = this.$attrs
+    const { format,value,editable} = this.$attrs
     return (
-      editable ? <DatePicker {...{ props: this.$attrs, on: this.$listeners}}>
+      editable ? <DatePicker {...{props: this.$attrs, on: this.$listeners}} onInput={e=>this.handleInput(e,format)}>
         { Object.keys(this.$attrs.slots).map(item => (
           <template slot = { this.$attrs.slots[item].name } >
             { this.$attrs.slots[item].render(h) }
           </template>
         )) }
       </DatePicker>:
-      <p>{ this.format(value,valueFormat)}</p>
+      <p>{ this.format(value,format)}</p>
     )
   }
 }

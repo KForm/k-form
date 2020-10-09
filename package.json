@@ -25,6 +25,7 @@
     "lint-staged": "^10.0.0-beta.15"
   },
   "dependencies": {
+    "@keepfe/node-core": "^1.1.432",
     "@keepfe/plugin-configjs": "^1.1.99",
     "@keepfe/plugin-femonitor": "^1.1.99",
     "@keepfe/plugin-functions": "^1.1.99",

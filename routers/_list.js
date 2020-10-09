@@ -36,6 +36,11 @@ let list = [home, {
   name: 'widget',
   meta: {},
   component: () => import('_app/pages/example/widget')
+},{
+  path: '/date-picker',
+  name: 'date-picker',
+  meta: {},
+  component: () => import('_app/pages/example/date-picker')
 }]
 
 export default list
