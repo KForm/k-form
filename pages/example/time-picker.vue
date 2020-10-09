@@ -1,14 +1,17 @@
 <template>
   <div>
-    {{ form }}
+    <p>
+      {{ form }}
+    </p>
     <keep-form ref="form1" :model="form" :schema="schema">
       <keep-field
         :value="form.time1"
         type="k-time-picker" 
-        field="date" 
-        label="时间" 
+        field="time1" 
+        :editable="false"
+        label="时间1" 
         :ui="{
-          type:'timerange',
+          format:'hh点mm分',
           $on: { 'on-change': (e) => handler(e) } 
         }"
         :rules="{ required: true, message: '请选择时间' }"
@@ -18,28 +21,27 @@
         :value="form.time2"
         type="k-time-picker" 
         field="time2" 
-        label="时间" 
+        label="时间2" 
         :ui="{
-          open:timeOpen,
+          open:time2Open,
           confirm:true,
-          type:'timerange',
           $on: { 
             'on-change': (time) => {
               form.time2 = time
             },
             'on-clear':()=>{
-              timeOpen= false
+              time2Open= false
             },
             'on-ok':()=>{
-              timeOpen= false
+              time2Open= false
             }
           } 
         }"
       >
-        <a href="javascript:void(0)" @click="handleTimeClick">
+        <a href="javascript:void(0)" @click="handleTime2Open">
           <Icon type="ios-clock-outline"></Icon>
-          <template v-if="form.time2 === ''">Select time</template>
-          <template v-else>{{ form.time2 }}</template>
+          <span v-if="form.time2 === ''">Select time</span>
+          <span v-else>{{ form.time2 }}</span>
         </a>
       </keep-field>
     </keep-form>
@@ -57,10 +59,13 @@ export default {
   data () {
     return {
       form: {
+        time1:'04点49分',
         time2:'',
-        time1:''
+        time3:'',
+        time4:''
       },
-      timeOpen:false
+      time2Open:false,
+      time3Open:false
     }
   },
   computed:{
@@ -69,53 +74,46 @@ export default {
         form: { ui: { labelWidth: 200 } },
         fields: [
           {
-            type: KeepForm.TYPE.DATEPICKER,
-            field: 'date2',
-            label: 'date2',
-            layout:{
-              span:6
-            },
+            type: KeepForm.TYPE.TIMEPICKER,
+            field: 'time3',
+            label: '时间3',
             ui:{
-              type:'date',
-              open:this.date2Open,
+              open:this.time3Open,
               confirm:true,
+              format:'hh时mm分ss秒',
               $slots:[
                 {
                   name:'default',
                   render:()=>{
                     return (
-                      <a href="javascript:void(0)" onClick={this.handleDate2Open}>
+                      <a href="javascript:void(0)" onClick={this.handleTime3Open}>
                         <Icon type="ios-clock-outline"></Icon>
-                        <template>{this.form.date2 === ''? 'select date' :this.form.date2}</template>
+                        <span>{this.form.time3 === ''? 'select time' :this.form.time3}</span>
                       </a>
                     )
                   }
                 }
               ],
-              $on:[
-                {
-                  'on-ok': (e) =>{
-                    this.date2Open = false
-                  },
-                  'on-change': (date) => {
-                    this.form.date2 = date
-                  },
-                  'on-clear': (e) => {
-                    this.date2Open = false
-                  }
+              $on:{
+                'on-ok': (e) =>{
+                  console.log('on-ok')
+                  this.time3Open = false
+                },
+                'on-change': (time) => {
+                  this.form.time3 = time
+                },
+                'on-clear': (e) => {
+                  console.log('on-clear')
+                  this.time3Open = false
                 }
-              ]
+              }
             }
           },
           {
             type: KeepForm.TYPE.TIMEPICKER,
-            field: 'date1',
-            label: '时间1',
-            layout:{
-              span:6
-            },
+            field: 'time4',
+            label: '时间4',
             ui: {
-              type: 'time',
               $on: {
                 'on-change': (e) => console.log(e)
               }
@@ -129,25 +127,11 @@ export default {
     handler(e) {
       console.log(e)
     },
-    handleDate1Open(){
-      this.date1Open = !this.date1Open
+    handleTime2Open(){
+      this.time2Open = !this.time2Open
     },
-    handleDate1Change (date) {
-      console.log(date)
-      this.form.date1 = date
-    },
-    handleDate1clear () {
-      this.date1Open = false
-    },
-    handleDate1Ok () {
-      this.date1Open = false
-    },
-    handleDate2Open(){
-      console.log('click')
-      this.form.date2Open = !this.form.date2Open
-    },
-    handleTimeClick(){
-
+    handleTime3Open(){
+      this.time3Open = !this.time3Open
     }
   }
 }

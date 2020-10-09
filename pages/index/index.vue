@@ -25,7 +25,8 @@
         <template v-slot:close>禁用</template>
       </keep-field>
     </keep-form>
-    <datePicker/>
+    <KDatePicker/>
+    <KTimePicker/>
     <KSwitch/>
     <KAutoComplete/>
     <KSlider/>
@@ -41,7 +42,8 @@
 
 import { preRenderEvent } from '@vuecore/libs/utils'
 import KeepForm from '_app/keep-form'
-import datePicker from '../example/date-picker'
+import KDatePicker from '../example/date-picker'
+import KTimePicker from '../example/time-picker'
 import KSwitch from '../example/switch'
 import KAutoComplete from '../example/auto-complete'
 import KSlider from '../example/slider'
@@ -54,7 +56,8 @@ export default {
   components: {
     KeepForm: KeepForm.Form,
     KeepField: KeepForm.Field,
-    datePicker,
+    KDatePicker,
+    KTimePicker,
     KSwitch,
     KAutoComplete,
     KSlider,
