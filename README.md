@@ -9,8 +9,8 @@
 - [x] select
 - [x] autocomplete
 - [x] slider
-- [ ] datepicker
-- [ ] timepicker
+- [x] datepicker
+- [x] timepicker
 - [ ] cascader
 - [x] inputnumber
 - [x] rate
