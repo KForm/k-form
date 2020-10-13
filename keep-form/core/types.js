@@ -12,5 +12,7 @@ export const TYPE = {
   INPUT_NUMBER: 'k-input-number',
   RATE: 'k-rate',
   COLOR_PICKER: 'k-color-picker',
-  WIDGET: 'k-widget'
+  WIDGET: 'k-widget',
+  UPLOAD:'k-upload',
+  CASCADER:'k-cascader'
 }

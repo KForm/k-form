@@ -7,6 +7,7 @@
         field="value"  
         type="k-upload"
         label="附件"
+        :editable="false"
         :ui="{
           isDrag:true,
           onComplete:handleOnComplete,
@@ -51,8 +52,7 @@ export default {
           field: 'value2',
           label: '附件2',
           ui:{
-            action:'action',
-            defaultFileList:this.form.value
+            isDrag:true,
           }
         }]
       }
