@@ -1,6 +1,6 @@
 import { TYPE } from '../core/types'
 import components from './components'
-import { slotsWrap, handleExpression, propExpressionWrap, propsExpressionWrap } from '../core/utils'
+import { slotsWrap, handleExpression, propExpressionWrap, propsExpressionWrap} from '../core/utils'
 import { _layout, _editable } from '../core/config'
 
 export default {
@@ -42,20 +42,26 @@ export default {
     component: {
     }
   },
-  inject: ['formHanlder'],
+  inject: ['formHanlder','deleteField','updateField'],
   methods: {
     getFieldComponent(type) {
       return components[type]
     },
-    $field() {
-      return this.$refs.fieldRef.$refs[this.field]
+    $iview(){
+      return this.$res[this.field].$res[`K-${this.field}`]
     },
+    delete(){
+      return this.deleteField(this.field)
+    },
+    update(info){
+      return this.updateField(this.field,info)
+    }
   },
   render(h) {
     const isHidden = handleExpression(this.$model, this.$props.ui ? this.$props.ui.$hidden : undefined)
     return (
-      !isHidden ? <i-col  { ...{ props: propsExpressionWrap(this.$model, this.layout) } }>
-        <form-item label = { propExpressionWrap(this.$model, this.label) } prop = { this.field } /* rules = { propsExpressionWrap(this.$model, this.rules) } */ >
+      !isHidden ? <i-col { ...{ props: propsExpressionWrap(this.$model, this.layout) } }>
+        <form-item  label = { propExpressionWrap(this.$model, this.label) } prop = { this.field } /* rules = { propsExpressionWrap(this.$model, this.rules) } */ >
           { h(this.getFieldComponent(this.type), {
             attrs: {
               value: this.$props.value,
@@ -70,7 +76,7 @@ export default {
               input: e => this.formHanlder(this.field, e),
               ...this.$props.ui.$on
             },
-            ref: 'fieldRef'
+            ref: `K-${this.field}`
           }) }
           <slot/>
         </form-item>

@@ -56,6 +56,31 @@ components: {
 
 1.2 layout：表单整体布局。
 
+2 方法
+
+| 方法        | 参数    |  返回值  |  备注  |
+| --------   | -----: | :----: |:----: |
+| update | (field，option） / {field1 : option1,field2 : option2} |promise|修改单个或多个表单配置，只是适用schema|
+| insert   | (option,index/field) |promise|单个或批量插入表单项，option类型可Array/Object|
+| delete   |index / field / index / field 数组 |promise|删除单个或多个指定下标或field 名称的表单项|
+
+多个方法同时用时需要 await 或 .then()
+
+示例：
+
+```
+this.$refs[formRef].updateField('name1',{label:'abc'})
+
+this.$refs[formRef].insertField({
+  type: KeepForm.TYPE.INPUT,
+  field: 'name',
+  label: '姓名'
+},'name1') //在name1后插入
+
+this.$refs[formRef].deleteField(['name1',3,5]) //删除field 为 name1 和下标为3、5的表单项
+```
+
+
 KeepForm 最终渲染出来的组件形式为：
 
 ```
@@ -95,6 +120,26 @@ layout 属性将生效于 Form 下的所有字段的 Col 组件中以完成全�
 2.4.1 说明：KeepForm 会根据 type 渲染成最终的表单 ui 组件，这些 ui 组件自身的属性、事件、插槽等等全部配置均收集在 ui 里。
 
 2.4.2 属性：以 input 为例
+
+2.5
+
+| 方法        | 参数    |  返回值  |  备注  |
+| --------   | -----: | :----: |:----: |
+| update | (option） / {field1 : option1,field2 : option2} |promise|修改单个或多个表单配置，只是适用schema|
+| insert   | (option,index/field) |promise|单个或批量插入表单项，option类型可Array/Object|
+| delete   |index / field / index / field 数组 |promise|删除单个或多个指定下标或field 名称的表单项|
+
+多个方法同时用时需要 await 或 .then()
+
+```
+this.$refs[formRef].$field('name1').update({
+  label:'abc'
+})
+this.$refs[formRef].$field('name1').delete()
+
+```
+
+
 
 支持配置 iview.Input 的全部属性
 

@@ -1,7 +1,7 @@
 <template>
   <div class="demo">
     {{ form }}
-    <keep-form ref="form1" :model="form" :schema="schema">
+    <keep-form ref="form1"  v-model="schema" :model="form">
       <keep-field
         v-model="form.name1" 
         type="k-input" 
@@ -20,6 +20,11 @@
         type='k-switch'
         field="switch"
         label="是否禁用name1"
+        :ui="{
+          $on:{
+            'on-change':handleSwitchChange
+          }
+        }"
       >
         <Icon slot="open" type="md-checkmark"></Icon>
         <template v-slot:close>禁用</template>
@@ -178,6 +183,9 @@ export default {
   methods: {
     handler(e) {
       console.log(e)
+    },
+    handleSwitchChange(){
+      this.$refs.form1.updateField('name',{label:'12312312'})
     }
   }
 }

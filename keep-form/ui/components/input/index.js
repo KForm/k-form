@@ -3,6 +3,12 @@ import { TYPE } from '../../../core/types'
 export default {
   name: TYPE.INPUT,
   inheritAttrs: false,
+  methods:{
+    $update(_name,_option){
+      console.log(Object.prototype.toString.call(_name))
+
+    }
+  },
   render(h) {
     const { editable, field, slots, value } = this.$attrs
     return (

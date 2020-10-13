@@ -1,6 +1,6 @@
 import BaseForm from '../core/form'
 import Field from './field'
-import { mapSchemaRules2UI, isBoolean, hasMatched, propExpressionWrap } from '../core/utils'
+import { mapSchemaRules2UI, isBoolean, hasMatched, propExpressionWrap,deepClone,isObject, isArray ,findIndexOfandCheck} from '../core/utils'
 import { refName, _schema, _editable } from '../core/config'
 // import render from './render'
 
@@ -15,7 +15,7 @@ export default {
       type: Object,
       default: () => ({})
     },
-    schema: {
+    value: { // schema 
       type: Object,
       default: () => _schema
     },
@@ -27,6 +27,9 @@ export default {
   computed: {
     formRules() {
       return mapSchemaRules2UI(this, this.schema.fields)
+    },
+    schema(){
+      return this.value
     }
   },
   provide() {
@@ -34,7 +37,9 @@ export default {
       formHanlder: (field, e) => {
         this.model[field] = e
         return
-      }
+      },
+      deleteField:this.deleteField,
+      updateField:this.updateField
     }
   },
   methods: {
@@ -56,17 +61,82 @@ export default {
       )
     },
     $field(field) {
-      return this.$refs[this.schema.fields.filter(item => item.field === field)[0].field].$field()
+      return this.$refs[this.schema.fields.filter(item => item.field === field)[0].field]
     },
     $form() {
       return this.$refs[refName]
     },
-    $setField(field, info) {
-      
+    refactorFields(field,info){
+      let _s = deepClone(this.value.fields)
+      if(isObject(field)){
+        return _s.map(item=>{
+          let obj = {}
+          for(let key in field){
+            if(item.field === key) obj =  Object.assign(item,field[key])
+            obj = item
+          }
+          return obj
+        })
+      }
+      return _s.map(item=>{
+        if(item.field === field) return Object.assign(item,info)
+        return item
+      })
+    },
+    
+    deleteField(index){
+      return new Promise((resolve, reject) => {
+        this.$nextTick(()=>{
+          let _s = deepClone(this.value.fields)
+          if(isArray(index)){
+            index.forEach((item,index)=>{
+              let _i = findIndexOfandCheck(item,_s,index)
+              if(_i === undefined) return
+              _s.splice(_i,1)
+            })
+          }else {
+            let _i = findIndexOfandCheck(index,_s)
+            if(_i === undefined) return
+            _s.splice(_i,1)
+          }
+          this.changeFields(_s)
+          resolve(_s)
+        })
+      })
+    },
+    insertField(info,index){
+      return new Promise((resolve, reject) => {
+        this.$nextTick(()=>{
+          let insertItem = []
+          if(isArray(info)){
+            insertItem = [...info]
+          }else if (isObject(info)){
+            insertItem = [info]
+          }else {
+            console.error(`${info} 请插入Object或Array类型的数据`)
+          }
+          let _s = deepClone(this.value.fields)
+          let _i = _s.length
+          _i = findIndexOfandCheck(index,_s)
+          if(_i === undefined) return
+          _s.splice(_i,0,...insertItem )
+          this.changeFields(_s)
+          resolve(_s)
+        })
+      })
+    },
+    updateField(field, info) {
+      return new Promise((resolve, reject) => {
+        this.$nextTick(()=>{
+          let _s = this.refactorFields(field,info)
+          this.changeFields(_s)
+          resolve(_s)
+        })
+      })
+    },
+    changeFields(_s){
+      this.$emit('input',{form:this.value.form,fields:_s})
     }
-    // handleFieldValueChange(field, e) {
-    //   this.$emit('input', {...this.value, ...{ [field]: e }})
-    // }
   },
   render(h) {
     return (

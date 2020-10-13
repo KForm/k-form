@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <keep-form :model="form" :schema="schema">
+      <keep-form v-model="schema" :model="form">
         <keep-field :value="form.rate1" type="k-rate" field="rate1" label="评分1" :ui="{ 'show-text': true }" >
           <span style="color: #f5a623;">{{ form.rate1 }}</span>
         </keep-field>

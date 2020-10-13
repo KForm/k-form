@@ -27,6 +27,7 @@ export const mapSchemaRules2UI = (ctx, schema) => {
     fields = []
   }
   fields.map(item => {
+    console.log(item)
     if (!item.componentOptions)return
     const { field, rules } = item.componentOptions.propsData
     rules && (rulesSet[field] = rules)
@@ -91,4 +92,41 @@ export const propsExpressionWrap = (form, props = {}) => {
     _props[item] = propExpressionWrap(form, props[item])
   })
   return _props
+}
+export const deepClone = (obj) => {
+  // 如果不是复杂数据类型,就直接返回一个一样的对象
+  if(typeof obj !== 'object'){
+    return obj
+  }
+  // 如果是,就递归调用
+  let newObj = {}
+  if(isObject(obj)){
+    for (let key in obj) {
+      newObj[key] = deepClone(obj[key])
+    }
+  }else if(isArray(obj)){
+    newObj = obj.map(item =>{
+      return deepClone(item)
+    })
+  }
+  return newObj
+}
+export const findIndexOfandCheck = (index,_s,num = 0) =>{
+  // num 为 index 的一个变量，n次遍历 - n ,避免因数组长度改变索引混乱
+  if(!isArray(index)&& typeof index !== 'number' && typeof index !== 'string'){
+    console.error(`${index} 请输入正确的表单项索引或field`)
+    return
+  }
+  let _i
+  if( typeof index === 'string'){
+    let temp = _s.indexOf(_s.find(item =>item.field === index))
+    if(temp > -1){
+      _i = temp
+    }else{
+      console.error(`未找到 filed 为 ${index} 的表单项`)
+      return
+    }
+  }
+  if(typeof index === 'number') _i = index - num
+  return _i
 }
