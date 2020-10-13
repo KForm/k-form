@@ -38,7 +38,7 @@ export default {
                 <p style="flex: 2; color: #6e6e6e; backgrou-color: #efefef; overflow: hidden; text-overflow: ellipsis; white-space:nowrap; cursor: pointer;"><Icon type="md-attach" /> { item.key }</p>
                 {canView ? <a href={item.url} target={'_blank'} style="width: 20px;"><Icon type="ios-eye-outline" /></a> : '' }
                 {canDelete && editable ? <a onClick={this.handleDelete(index)} style="width: 20px;"><Icon type="ios-trash-outline" /></a> : '' }
-                {canDownload ? <a onClick={this.handleDelete(item)} style="width: 20px;"><Icon type="ios-cloud-download-outline" /></a> : '' }
+                {canDownload ? <a onClick={this.handleDownload(item)} style="width: 20px;"><Icon type="ios-cloud-download-outline" /></a> : '' }
               </div>
             ))
           }
