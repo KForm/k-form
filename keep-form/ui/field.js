@@ -33,7 +33,7 @@ export default {
       type: [Object, Array]
     },
     editable: {
-      type: Boolean,
+      type: [Boolean, String],
       default: _editable
     },
     $model: {
@@ -62,7 +62,7 @@ export default {
               slots: this.$props.ui.$slots || slotsWrap(this, this.$slots),
               ...propsExpressionWrap(this.$model, this.$props.ui),
               field: this.$props.field,
-              editable: propExpressionWrap(this.$model, this.$props.editable),
+              editable: this.$props.editable,
               component: this.$props.component
               // $field: () => this.$field()
             },

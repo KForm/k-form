@@ -71,8 +71,8 @@ export default {
   render(h) {
     return (
       <div class="form-wrap">
-        <Form ref={ refName } { ...{ props: { model: this.model, rules: this.formRules, ...this.schema.form.ui } } } on-change={ e => console.log(e) }>
-          { this.schema.fields.map((item) => this.renderField(this.schema.form, item)) }
+        <Form ref={ refName } { ...{ props: { model: this.model, rules: this.formRules, ...(this.schema.form ? this.schema.form.ui : {}) } } } on-change={ e => console.log(e) }>
+          { this.schema.fields.map((item) => this.renderField(this.schema.form || {}, item)) }
           { this.$slots.default }
         </Form>
       </div>
