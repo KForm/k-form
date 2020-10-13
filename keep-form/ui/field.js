@@ -1,6 +1,6 @@
 import { TYPE } from '../core/types'
 import components from './components'
-import { slotsWrap } from '../core/utils'
+import { slotsWrap, handleExpression, propExpressionWrap, propsExpressionWrap } from '../core/utils'
 import { _layout, _editable } from '../core/config'
 
 export default {
@@ -36,6 +36,9 @@ export default {
       type: Boolean,
       default: _editable
     },
+    $model: {
+      type: [Object, Array]
+    },
     component: {
     }
   },
@@ -46,19 +49,20 @@ export default {
     },
     $field() {
       return this.$refs.fieldRef.$refs[this.field]
-    }
+    },
   },
   render(h) {
+    const isHidden = handleExpression(this.$model, this.$props.ui ? this.$props.ui.$hidden : undefined)
     return (
-      <i-col  { ...{ props: this.layout } }>
-        <form-item label = { this.label } prop = { this.field } >
+      !isHidden ? <i-col  { ...{ props: propsExpressionWrap(this.$model, this.layout) } }>
+        <form-item label = { propExpressionWrap(this.$model, this.label) } prop = { this.field } /* rules = { propsExpressionWrap(this.$model, this.rules) } */ >
           { h(this.getFieldComponent(this.type), {
             attrs: {
               value: this.$props.value,
               slots: this.$props.ui.$slots || slotsWrap(this, this.$slots),
-              ...this.$props.ui,
+              ...propsExpressionWrap(this.$model, this.$props.ui),
               field: this.$props.field,
-              editable: this.$props.editable,
+              editable: propExpressionWrap(this.$model, this.$props.editable),
               component: this.$props.component
               // $field: () => this.$field()
             },
@@ -70,7 +74,7 @@ export default {
           }) }
           <slot/>
         </form-item>
-      </i-col>
+      </i-col> : null
     )
   }
 }

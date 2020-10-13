@@ -58,3 +58,37 @@ export const isArray = v => getTypeString(v) === '[object Array]'
 export const isBoolean = v => typeof v === 'boolean'
 
 export const isMultipleArr = v => isArray(v) ? v.every(e => isArray(e)) : false
+
+export const regExpression = /{{(.*)}}/
+
+export const hasMatched = expression => regExpression.exec(expression)
+
+export const handleExpression = (form, expression) => {
+  if(!expression) {
+    return
+  }
+  const matched = hasMatched(expression)
+  if(matched) {
+    const body = matched[1].trim()
+    /* eslint-disable */
+    const func = new Function('form', `return ${body}`)
+    return func(form)
+  }
+}
+
+export const propExpressionWrap = (form, prop) => {
+  if(hasMatched(prop)) {
+    return handleExpression(form, prop)
+  }
+  else {
+    return prop
+  }
+}
+
+export const propsExpressionWrap = (form, props = {}) => {
+  let _props = {}
+  Object.keys(props).map(item => {
+    _props[item] = propExpressionWrap(form, props[item])
+  })
+  return _props
+}

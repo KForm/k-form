@@ -41,6 +41,11 @@ let list = [home, {
   name: 'date-picker',
   meta: {},
   component: () => import('_app/pages/example/date-picker')
+}, {
+  path: '/linkage',
+  name: 'linkage',
+  meta: {},
+  component: () => import('_app/pages/example/linkage')
 }]
 
 export default list

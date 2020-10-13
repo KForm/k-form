@@ -1,6 +1,6 @@
 import BaseForm from '../core/form'
 import Field from './field'
-import { mapSchemaRules2UI, isBoolean } from '../core/utils'
+import { mapSchemaRules2UI, isBoolean, hasMatched, propExpressionWrap } from '../core/utils'
 import { refName, _schema, _editable } from '../core/config'
 // import render from './render'
 
@@ -49,8 +49,9 @@ export default {
           ui = { field.ui }
           layout = { field.layout || form.layout }
           rules = { field.rules }
-          editable = { isBoolean(field.editable) ? field.editable : isBoolean(form.editable) ? form.editable : _editable }
+          editable = { hasMatched(field.editable) ? propExpressionWrap(this.model, field.editable) : isBoolean(field.editable) ? field.editable : isBoolean(form.editable) ? form.editable : _editable }
           component = { field.component }
+          $model = { this.model }
         />
       )
     },
