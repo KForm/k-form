@@ -51,6 +51,12 @@ let list = [home, {
   name: 'linkage2',
   meta: {},
   component: () => import('_app/pages/example/linkage2')
+},
+{
+  path: '/demo',
+  name: 'demo',
+  meta: {},
+  component: () => import('_app/pages/example/demo')
 }]
 
 export default list

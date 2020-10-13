@@ -12,8 +12,8 @@ import InputNumber from './input-number/index'
 import Rate from './rate/index'
 import ColorPicker from './color-picker/index'
 import Widget from './widget'
-import Upload from './upload'
 import Cascader from './cascader'
+import Upload from './upload'
 import { TYPE } from '../../core/types'
 
 export default {
@@ -31,6 +31,6 @@ export default {
   [TYPE.RATE]: Rate,
   [TYPE.COLOR_PICKER]: ColorPicker,
   [TYPE.WIDGET]: Widget,
-  [TYPE.UPLOAD]:Upload,
-  [TYPE.CASCADER]:Cascader
+  [TYPE.CASCADER]:Cascader,
+  [TYPE.UPLOAD]:Upload
 }

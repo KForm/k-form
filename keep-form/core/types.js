@@ -13,6 +13,6 @@ export const TYPE = {
   RATE: 'k-rate',
   COLOR_PICKER: 'k-color-picker',
   WIDGET: 'k-widget',
-  UPLOAD:'k-upload',
-  CASCADER:'k-cascader'
+  CASCADER:'k-cascader',
+  UPLOAD:'k-upload'
 }

@@ -8,7 +8,7 @@
         label="用户2"
         :ui="{
           disabled:!form.switch,
-          $on: { 'on-change': (e) => handler(e) } 
+          $on: { 'on-change': (e) => handler(e) }
         }"
         :rules="{ required: true, message: '11edasrbg1' }"
       >

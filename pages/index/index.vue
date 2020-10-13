@@ -40,8 +40,8 @@
     <KColorPicker/>
     <!-- <KTransfer/> -->
     <KWidget/>
-    <KUpload/>
     <KCascader/>
+    <KUpload />
   </div>
 </template>
 
@@ -58,8 +58,8 @@ import KInputNumber from '../example/input-number'
 import KRate from '../example/rate'
 import KColorPicker from '../example/color-picker'
 import KWidget from '../example/widget'
-import KUpload from '../example/upload'
 import KCascader from '../example/cascader'
+import KUpload from '../example/upload'
 export default {
   name: 'Index',
   components: {
