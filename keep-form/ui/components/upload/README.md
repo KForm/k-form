@@ -2,7 +2,8 @@
 
 #### 属性
 支持keepfe vue组件上传属性 具体请参考 [Keep vue 组件上传](https://tech-docs.gotokeep.com/keepfe/#/zh-cn/plugin/upload?id=avue%e6%96%b9%e6%a1%88%ef%bc%9a)
-其中将onComplete 属性改为 complete方法，详情请参考事件
+
+其中将onComplete 属性改为 complete事件，详情请参考事件
 
 #### 事件
 | 事件        | 类型    |  返回值  |  备注  |
