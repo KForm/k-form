@@ -83,7 +83,6 @@ export default {
         return item
       })
     },
-    
     deleteField(index){
       return new Promise((resolve, reject) => {
         this.$nextTick(()=>{

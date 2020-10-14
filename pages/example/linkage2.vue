@@ -86,7 +86,7 @@ export default {
       console.log(e)
     },
     async handleNumChange(val){
-      console.log(this.$refs.form.$field('name8'))
+      console.log(this.$refs.form.$field('name8').$iview())
       // await this.$refs.form.$field('name8').delete()
       // await this.$refs.form.$field('name1').update({
       //   label:'通过field改变的name1'

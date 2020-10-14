@@ -60,9 +60,9 @@ components: {
 
 | 方法        | 参数    |  返回值  |  备注  |
 | --------   | -----: | :----: |:----: |
-| update | (field，option） / {field1 : option1,field2 : option2} |promise|修改单个或多个表单配置，只是适用schema|
-| insert   | (option,index/field) |promise|单个或批量插入表单项，option类型可Array/Object|
-| delete   |index / field / index / field 数组 |promise|删除单个或多个指定下标或field 名称的表单项|
+| updateField | (field，option） / {field1 : option1,field2 : option2} |promise|修改单个或多个表单配置，只是适用schema|
+| insertField   | (option,index/field) |promise|单个或批量插入表单项，option类型可Array/Object|
+| deleteField   |index / field / index / field 数组 |promise|删除单个或多个指定下标或field 名称的表单项|
 
 多个方法同时用时需要 await 或 .then()
 
@@ -125,9 +125,11 @@ layout 属性将生效于 Form 下的所有字段的 Col 组件中以完成全�
 
 | 方法        | 参数    |  返回值  |  备注  |
 | --------   | -----: | :----: |:----: |
-| update | (option） / {field1 : option1,field2 : option2} |promise|修改单个或多个表单配置，只是适用schema|
-| insert   | (option,index/field) |promise|单个或批量插入表单项，option类型可Array/Object|
-| delete   |index / field / index / field 数组 |promise|删除单个或多个指定下标或field 名称的表单项|
+| update | option |promise|修改当前field的表单项配置|
+| delete   |无 |promise|删除当前field|
+
+
+只是适用schema
 
 多个方法同时用时需要 await 或 .then()
 
@@ -263,8 +265,10 @@ KeepForm 支持以下两种方式获取到 iview.Input 实例：
 }] }" />
 
 mounted() {
-  // this.$refs.form.$field('name') 获取到 iview.Input
-  this.$refs.form.$field('name').focus()
+  // this.$refs.form.$field('name') 获取到 当前field
+  // this.$refs.form.$field('name').$iview() 获取到 iview input
+
+  this.$refs.form.$field('name').$iview().focus()
 }
 ```
 
@@ -276,8 +280,9 @@ mounted() {
 </keep-form>
 
 mounted() {
-  // this.$refs.name.$field 获取到 iview.Input
-  this.$refs.name.$field().focus()
+  // this.$refs.name.$field 获取到 field
+  // this.$refs.name.$iview 获取到 iview input
+  this.$refs.name.$iview().focus()
 }
 ```
 

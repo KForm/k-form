@@ -48,7 +48,7 @@ export default {
       return components[type]
     },
     $iview(){
-      return this.$res[this.field].$res[`K-${this.field}`]
+      return this.$refs[`K-${this.field}`]
     },
     delete(){
       return this.deleteField(this.field)
