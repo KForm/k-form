@@ -1,6 +1,6 @@
 import { TYPE } from '../core/types'
 import components from './components'
-import { slotsWrap, handleExpression, propExpressionWrap, propsExpressionWrap} from '../core/utils'
+import { slotsWrap, propExpressionWrap, handleExpression} from '../core/utils'
 import { _layout, _editable } from '../core/config'
 
 export default {
@@ -36,13 +36,14 @@ export default {
       type: [Boolean, String],
       default: _editable
     },
-    $model: {
-      type: [Object, Array]
+    hidden: {
+      type: [Boolean, String],
+      default: false
     },
     component: {
-    }
+    },
   },
-  inject: ['formHanlder','deleteField','updateField'],
+  inject: ['$context', '$inject', 'formHanlder','deleteField','updateField'],
   methods: {
     getFieldComponent(type) {
       return components[type]
@@ -58,20 +59,21 @@ export default {
     }
   },
   render(h) {
-    const isHidden = handleExpression(this.$model, this.$props.ui ? this.$props.ui.$hidden : undefined)
     return (
-      !isHidden ? <i-col { ...{ props: propsExpressionWrap(this.$model, this.layout) } }>
-        <form-item  label = { propExpressionWrap(this.$model, this.label) } prop = { this.field } /* rules = { propsExpressionWrap(this.$model, this.rules) } */ >
+      !handleExpression(this.$context, this.$inject, this.$props.hidden) ? <i-col { ...{ props: propExpressionWrap(this.$context, this.$inject, this.layout) } }>
+        <form-item label = { propExpressionWrap(this.$context, this.$inject, this.label) } prop = { this.field } >
           { h(this.getFieldComponent(this.type), {
             attrs: {
               value: this.$props.value,
               slots: this.$props.ui.$slots || slotsWrap(this, this.$slots),
-              ...propsExpressionWrap(this.$model, this.$props.ui),
+              ...propExpressionWrap(this.$context, this.$inject, this.$props.ui),
               field: this.$props.field,
-              editable: this.$props.editable,
+              editable: propExpressionWrap(this.$context, this.$inject, this.$props.editable),
               component: this.$props.component
               // $field: () => this.$field()
             },
+            style: propExpressionWrap(this.$context, this.$inject, this.$props.ui.$style),
+            class: propExpressionWrap(this.$context, this.$inject, this.$props.ui.$class),
             on: {
               input: e => this.formHanlder(this.field, e),
               ...this.$props.ui.$on

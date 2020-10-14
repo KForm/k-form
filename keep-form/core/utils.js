@@ -64,35 +64,54 @@ export const regExpression = /{{(.*)}}/
 
 export const hasMatched = expression => regExpression.exec(expression)
 
-export const handleExpression = (form, expression) => {
+export const handleExpression = (context, inject, expression) => {
   if(!expression) {
     return
   }
   const matched = hasMatched(expression)
   if(matched) {
     const body = matched[1].trim()
+    let scope  =['form']
+    for(let k in context) {
+      if(inject.indexOf(k) > -1) {
+        scope.push(k)
+      }
+    }
     /* eslint-disable */
-    const func = new Function('form', `return ${body}`)
-    return func(form)
+    const func = new Function(...scope, `return ${body}`)
+    return func(...scope.map(item => context[item]))
   }
 }
 
-export const propExpressionWrap = (form, prop) => {
+export const expressionWrap = (form, inject, prop) => {
   if(hasMatched(prop)) {
-    return handleExpression(form, prop)
+    return handleExpression(form, inject, prop)
   }
   else {
     return prop
   }
 }
 
-export const propsExpressionWrap = (form, props = {}) => {
-  let _props = {}
-  Object.keys(props).map(item => {
-    _props[item] = propExpressionWrap(form, props[item])
-  })
-  return _props
+export const propExpressionWrap = (form, inject, prop) => {
+  if(isNull(prop)) {
+    return undefined
+  }
+  if(typeof prop === 'string') {
+    return expressionWrap(form, inject, prop)
+  }
+  if(isObject(prop)) {
+    let _prop = {}
+    Object.keys(prop).map(item => {
+      _prop[item] = propExpressionWrap(form, inject, prop[item])
+    })
+    return _prop
+  }
+  if(isArray(prop)) {
+    return prop.map(item => propExpressionWrap(form, inject, item))
+  }
+  return prop
 }
+
 export const deepClone = (obj) => {
   // 如果不是复杂数据类型,就直接返回一个一样的对象
   if(typeof obj !== 'object'){

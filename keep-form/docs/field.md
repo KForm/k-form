@@ -42,6 +42,6 @@ export default {
 使用 Field 组件将会导致以下特性失效，请酌情使用。
 
 * `ui.$slots` 不再生效，若想实现本功能可直接在组件内正常使用 slot
-* `ui.$hidden` 不再生效，可在组件上绑定指令实现隐藏功能
+* `hidden` 不再生效，可在组件上绑定指令实现隐藏功能
 * `schema.form.editable` 和 `schema.form.layout` 在本组件中不生效，请在本组件中配置自身的 editable 和 layout 属性
 * 「表单联动」一章涉及的内容不再生效，请自行绑定指令或监听事件来实现

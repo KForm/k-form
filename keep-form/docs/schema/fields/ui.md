@@ -69,7 +69,7 @@
 
 ### 数据源 $data
 
-> 以字典表的形式为 checkbox、radio、select 等组件配置数据源
+以字典表的形式为 checkbox、radio、select 等组件配置数据源
 
 以 `iview.Checkbox` 为例：
 
@@ -86,9 +86,9 @@
 
 > 除了 name、id 外，$data 还支持其他配置，比如：disabled、render 等等，这些配置取决于组件的类型，请移步至各个组件文档中
 
-### 隐藏表单字段 $hidden
+### 样式 $style
 
-> 该字段是否需要隐藏，支持 boolean 值和表达式
+作用于最终渲染的 iview 表单组件的样式，使用方法同 vue 的 style 属性
 
 ```jsx
 <k-form  :model="form" :schema="{
@@ -96,22 +96,34 @@
     type: KForm.TYPE.INPUT,
     field: 'name',
     label: '姓名：',
-    ui: { $hidden: true  }
+    ui: { $style: 'width: 200px;'  }
   }] 
 }" />
 ```
+
+等同于：
+
+```jsx
+<Input style="width: 200px;" />
+```
+
+### 类 $class
+
+作用于最终渲染的 iview 表单组件的类，使用方法同 vue 的 class 属性
 
 ```jsx
 <k-form  :model="form" :schema="{
   fields: [{
     type: KForm.TYPE.INPUT,
     field: 'name',
-    label: '姓名：'
-  }, {
-    type: KForm.TYPE.INPUT,
-    field: 'age',
-    label: '年龄：',
-    ui: { $hidden: '{{ form.name.length > 5 }}' }
+    label: '姓名：',
+    ui: { $class: 'my-input'  }
   }] 
 }" />
+```
+
+等同于：
+
+```jsx
+<Input class="my-input" />
 ```

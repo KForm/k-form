@@ -6,6 +6,7 @@
         - [ui](/schema/form/ui.md)
         - [layout](/schema/form/layout.md)
         - [editable](/schema/form/editable.md)
+        - [inject](/schema/form/inject.md)
       - fields
         - [type](/schema/fields/type.md)
         - [field](/schema/fields/field.md)
@@ -14,6 +15,7 @@
         - [layout](/schema/fields/layout)
         - [rules](/schema/fields/rules)
         - [editable](/schema/fields/editable)
+        - [hidden](/schema/fields/hidden)
     - [Field](/field.md)
 - UI 组件
     - [Input](/component/input.md)

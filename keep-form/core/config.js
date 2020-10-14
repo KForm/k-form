@@ -8,7 +8,8 @@ export const _schema = {
   form: {
     ui: {},
     editable: _editable,
-    layout: _layout
+    layout: _layout,
+    inject: ''
   },
   fields: [],
 }

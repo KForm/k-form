@@ -1,10 +1,29 @@
 import BaseForm from '../core/form'
 import Field from './field'
-import { mapSchemaRules2UI, isBoolean, hasMatched, propExpressionWrap,deepClone,isObject, isArray ,findIndexOfandCheck} from '../core/utils'
+import { mapSchemaRules2UI, isBoolean, hasMatched,deepClone,isObject, isArray ,findIndexOfandCheck} from '../core/utils'
 import { refName, _schema, _editable } from '../core/config'
 // import render from './render'
 
 let kf = new BaseForm(this)
+
+const injectModel = (context, model, modelList) => {
+  if(!modelList) {
+    return {
+      form: model
+    }
+  }
+  else if(isArray(modelList)) {
+    let modelService = {}
+    modelList.map(item => {
+      modelService[item] = context[item]
+      return
+    })
+    return { form: model, inject: modelService }
+  }
+  return {
+    form: model
+  }
+}
 
 export default {
   components: {
@@ -38,6 +57,9 @@ export default {
         this.model[field] = e
         return
       },
+      $context: this.$parent,
+      $inject: this.schema.form.inject,
+      $model: injectModel(this.$parent, this.model, this.schema.form.inject),
       deleteField:this.deleteField,
       updateField:this.updateField
     }
@@ -54,9 +76,9 @@ export default {
           ui = { field.ui }
           layout = { field.layout || form.layout }
           rules = { field.rules }
-          editable = { hasMatched(field.editable) ? propExpressionWrap(this.model, field.editable) : isBoolean(field.editable) ? field.editable : isBoolean(form.editable) ? form.editable : _editable }
+          editable = { hasMatched(field.editable) ? field.editable : isBoolean(field.editable) ? field.editable : isBoolean(form.editable) ? form.editable : _editable }
+          hidden = { field.hidden }
           component = { field.component }
-          $model = { this.model }
         />
       )
     },
