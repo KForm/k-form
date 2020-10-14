@@ -85,6 +85,9 @@ export default {
     $field(field) {
       return this.$refs[this.schema.fields.filter(item => item.field === field)[0].field]
     },
+    $iview(field){
+      return this.$field(field).$iview()
+    },
     $form() {
       return this.$refs[refName]
     },
@@ -105,7 +108,6 @@ export default {
         return item
       })
     },
-    
     deleteField(index){
       return new Promise((resolve, reject) => {
         this.$nextTick(()=>{
@@ -153,6 +155,16 @@ export default {
           let _s = this.refactorFields(field,info)
           this.changeFields(_s)
           resolve(_s)
+        })
+      })
+    },
+    updateForm(option){
+      return new Promise((resolve, reject) => {
+        this.$nextTick(()=>{
+          let form = Object.assign(deepClone(this.value.form),option)
+          console.log(form)
+          this.$emit('input',{form:form,fields:this.value.fields})
+          resolve(form)
         })
       })
     },

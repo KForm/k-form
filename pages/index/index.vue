@@ -121,6 +121,10 @@ export default {
             span: '12'
           },
           ui: {
+            tooltip:{
+              content:'提示12121',
+              placement:'top-start'
+            },
             $data: [{id: 0, name: '女'}, {id: 1, name: '男'}],
             $on: {
               'on-change': e => console.log(e)

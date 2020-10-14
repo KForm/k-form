@@ -1,7 +1,8 @@
 import { TYPE } from '../core/types'
 import components from './components'
-import { slotsWrap, propExpressionWrap, handleExpression} from '../core/utils'
+import { slotsWrap, propExpressionWrap, handleExpression, isObject} from '../core/utils'
 import { _layout, _editable } from '../core/config'
+import './style/field.less'
 
 export default {
   props: {
@@ -48,8 +49,28 @@ export default {
     getFieldComponent(type) {
       return components[type]
     },
+    // renderTooltip(tooltip) {
+    //   if(isObject(tooltip)){
+    //     let { slots,content } = tooltip
+    //     return (
+    //       <Tooltip content="Here is the prompt text">
+    //         { Object.keys(slots).map(item => (
+    //           <template slot = { slots[item].name } >
+    //             { slots[item].render(h) }
+    //           </template>
+    //         )) }
+    //       </Tooltip>
+    //     )
+    //   }else if(typeof tooltip === 'string'){
+    //     return (
+    //       <Tooltip content="Here is the prompt text">
+    //         <Icon type="md-information-circle" />
+    //       </Tooltip>
+    //     )
+    //   }
+    // },
     $iview(){
-      return this.$res[this.field].$res[`K-${this.field}`]
+      return this.$refs[`K-${this.field}`]
     },
     delete(){
       return this.deleteField(this.field)
@@ -59,6 +80,7 @@ export default {
     }
   },
   render(h) {
+    const {tooltip} = this.$props.ui
     return (
       !handleExpression(this.$context, this.$inject, this.$props.hidden) ? <i-col { ...{ props: propExpressionWrap(this.$context, this.$inject, this.layout) } }>
         <form-item label = { propExpressionWrap(this.$context, this.$inject, this.label) } prop = { this.field } >
@@ -81,6 +103,23 @@ export default {
             ref: `K-${this.field}`
           }) }
           <slot/>
+          {
+            isObject(tooltip)?
+              <Tooltip {...{props:{...tooltip}}}>
+                {tooltip.$slots && Object.keys(tooltip.$slots).map(item => (
+                  <template slot = { tooltip.$slots[item].name } >
+                    { tooltip.$slots[item].render(h) }
+                  </template>
+                ))}
+                <template slot="default">
+                  <Icon type="md-information-circle" /> 
+                </template>
+              </Tooltip>:
+              typeof tooltip === 'string' ?
+                <Tooltip content={tooltip}>
+                  <Icon type="md-information-circle" />
+                </Tooltip>:null
+          }
         </form-item>
       </i-col> : null
     )

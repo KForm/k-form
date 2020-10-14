@@ -59,11 +59,12 @@ components: {
 2 方法
 
 | 方法        | 参数    |  返回值  |  备注  |
-| --------   | -----: | :----: |:----: |
-| update | (field，option） / {field1 : option1,field2 : option2} |promise|修改单个或多个表单配置，只是适用schema|
-| insert   | (option,index/field) |promise|单个或批量插入表单项，option类型可Array/Object|
-| delete   |index / field / index / field 数组 |promise|删除单个或多个指定下标或field 名称的表单项|
-
+| ---   | ------- | ---- |---- |
+| updateField | (field，option) <br/> {field1 : option1,field2 : option2} |promise|修改单个或多个表单配置|
+| insertField   | (option,index/field) |promise|单个或批量插入表单项，option类型可Array/Object|
+| deleteField   |index / field / index / field 数组 |promise|删除单个或多个指定下标或field 名称的表单项|
+| updateForm   |{} form属性 |promise|修改表单相关属性|
+此类方法只适用schema配置的表单
 多个方法同时用时需要 await 或 .then()
 
 示例：
@@ -125,9 +126,11 @@ layout 属性将生效于 Form 下的所有字段的 Col 组件中以完成全�
 
 | 方法        | 参数    |  返回值  |  备注  |
 | --------   | -----: | :----: |:----: |
-| update | (option） / {field1 : option1,field2 : option2} |promise|修改单个或多个表单配置，只是适用schema|
-| insert   | (option,index/field) |promise|单个或批量插入表单项，option类型可Array/Object|
-| delete   |index / field / index / field 数组 |promise|删除单个或多个指定下标或field 名称的表单项|
+| update | option |promise|修改当前field的表单项配置|
+| delete   |无 |promise|删除当前field|
+
+
+只是适用schema
 
 多个方法同时用时需要 await 或 .then()
 
@@ -212,6 +215,29 @@ this.$refs[formRef].$field('name1').delete()
   rules: { required: true, message: '请选择您的喜好' }
 }] }" />
 ```
+2.7 tooltip： 文字提示，tooltip字段类型：String、Object，String时直接显示提示，使用默认配置；Object时属性包括iview tooltip组件中的所有属性，可自行配置content、placement等属性，通过$slots来配置相关插槽，格式参考 field组件。 相关事件暂不支持
+```
+{
+  label:'用户名',
+  field:'name',
+  type:KeepForm.TYPE.CHECKBOX,
+  tooltip:{
+    content:'用户名称',
+    placement:'right-end',
+    delay:1000,
+    $slots:[
+      {
+        name:'content',
+        render:()=>'可覆盖前面的content'
+      },
+      {
+        name:'default',
+        render:()=><Icon type="md-alert" />
+      }
+    ]
+  }
+}
+```
 
 ### Field 组件
 
@@ -263,8 +289,16 @@ KeepForm 支持以下两种方式获取到 iview.Input 实例：
 }] }" />
 
 mounted() {
-  // this.$refs.form.$field('name') 获取到 iview.Input
-  this.$refs.form.$field('name').focus()
+  // this.$refs.form.$field('name') 获取到 当前field
+
+  // this.$refs.form.$field('name').$iview() 获取到 iview input
+
+  或
+
+  // this.$refs.form.$iview('name') // 获取到 iview input
+
+
+  this.$refs.form.$field('name').$iview().focus()
 }
 ```
 
@@ -276,8 +310,9 @@ mounted() {
 </keep-form>
 
 mounted() {
-  // this.$refs.name.$field 获取到 iview.Input
-  this.$refs.name.$field().focus()
+  // this.$refs.name.$field 获取到 field
+  // this.$refs.name.$iview 获取到 iview input
+  this.$refs.name.$iview().focus()
 }
 ```
 
@@ -304,7 +339,7 @@ mounted() {
 
 通过切换 editable 来设置表单的模式（填写或数据展示）
 
-默认值均为 false（填写模式）
+默认值均为 true（填写模式）
 
 #### 设置方式
 

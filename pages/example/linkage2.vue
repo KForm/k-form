@@ -86,7 +86,12 @@ export default {
       console.log(e)
     },
     async handleNumChange(val){
-      console.log(this.$refs.form.$field('name8'))
+      await this.$refs.form.updateForm({
+        ui:{labelWidth: 300 }
+      }).then(res=>{
+        console.log(res)
+        console.log(this.schema.form)
+      })
       // await this.$refs.form.$field('name8').delete()
       // await this.$refs.form.$field('name1').update({
       //   label:'通过field改变的name1'

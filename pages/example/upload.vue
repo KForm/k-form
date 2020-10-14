@@ -7,7 +7,7 @@
         field="value"  
         type="k-upload"
         label="附件"
-        :editable="false"
+     
         :ui="{
           isDrag:true,
           onComplete:handleOnComplete,
