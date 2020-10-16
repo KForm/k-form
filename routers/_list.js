@@ -57,6 +57,12 @@ let list = [home, {
   name: 'demo',
   meta: {},
   component: () => import('_app/pages/example/demo')
+},
+{
+  path: '/complex-layout',
+  name: 'complexLayout',
+  meta: {},
+  component: () => import('_app/pages/example/complex-layout')
 }]
 
 export default list

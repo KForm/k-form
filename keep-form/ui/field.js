@@ -41,6 +41,12 @@ export default {
       type: [Boolean, String],
       default: false
     },
+    refName:{
+      type:String
+    },
+    groupName:{
+      type:String
+    },
     component: {
     },
   },
@@ -82,46 +88,47 @@ export default {
   render(h) {
     const {tooltip} = this.$props.ui
     return (
-      !handleExpression(this.$context, this.$inject, this.$props.hidden) ? <i-col { ...{ props: propExpressionWrap(this.$context, this.$inject, this.layout) } }>
-        <form-item label = { propExpressionWrap(this.$context, this.$inject, this.label) } prop = { this.field } >
-          { h(this.getFieldComponent(this.type), {
-            attrs: {
-              value: this.$props.value,
-              slots: this.$props.ui.$slots || slotsWrap(this, this.$slots),
-              ...propExpressionWrap(this.$context, this.$inject, this.$props.ui),
-              field: this.$props.field,
-              editable: propExpressionWrap(this.$context, this.$inject, this.$props.editable),
-              component: this.$props.component
-              // $field: () => this.$field()
-            },
-            style: propExpressionWrap(this.$context, this.$inject, this.$props.ui.$style),
-            class: propExpressionWrap(this.$context, this.$inject, this.$props.ui.$class),
-            on: {
-              input: e => this.formHanlder(this.field, e),
-              ...this.$props.ui.$on
-            },
-            ref: `K-${this.field}`
-          }) }
-          <slot/>
-          {
-            isObject(tooltip)?
-              <Tooltip {...{props:{...tooltip}}}>
-                {tooltip.$slots && Object.keys(tooltip.$slots).map(item => (
-                  <template slot = { tooltip.$slots[item].name } >
-                    { tooltip.$slots[item].render(h) }
+      !handleExpression(this.$context, this.$inject, this.$props.hidden) ?
+        <i-col {...{props:propExpressionWrap(this.$context, this.$inject, this.layout || this.schema.form.layout)}}> 
+          <form-item label = { propExpressionWrap(this.$context, this.$inject, this.label) } prop = { this.field } >
+            { h(this.getFieldComponent(this.type), {
+              attrs: {
+                value: this.$props.value,
+                slots: this.$props.ui.$slots || slotsWrap(this, this.$slots),
+                ...propExpressionWrap(this.$context, this.$inject, this.$props.ui),
+                field: this.$props.field,
+                editable: propExpressionWrap(this.$context, this.$inject, this.$props.editable),
+                component: this.$props.component
+                // $field: () => this.$field()
+              },
+              style: propExpressionWrap(this.$context, this.$inject, this.$props.ui.$style),
+              class: propExpressionWrap(this.$context, this.$inject, this.$props.ui.$class),
+              on: {
+                input: e => this.formHanlder(this.field, e,this.refName,this.groupName),
+                ...this.$props.ui.$on
+              },
+              ref: `K-${this.field}`
+            }) }
+            <slot/>
+            {
+              isObject(tooltip)?
+                <Tooltip {...{props:{...tooltip}}}>
+                  {tooltip.$slots && Object.keys(tooltip.$slots).map(item => (
+                    <template slot = { tooltip.$slots[item].name } >
+                      { tooltip.$slots[item].render(h) }
+                    </template>
+                  ))}
+                  <template slot="default">
+                    <Icon type="md-information-circle" /> 
                   </template>
-                ))}
-                <template slot="default">
-                  <Icon type="md-information-circle" /> 
-                </template>
-              </Tooltip>:
-              typeof tooltip === 'string' ?
-                <Tooltip content={tooltip}>
-                  <Icon type="md-information-circle" />
-                </Tooltip>:null
-          }
-        </form-item>
-      </i-col> : null
+                </Tooltip>:
+                typeof tooltip === 'string' ?
+                  <Tooltip content={tooltip}>
+                    <Icon type="md-information-circle" />
+                  </Tooltip>:null
+            }
+          </form-item>
+        </i-col> : null
     )
   }
 }
