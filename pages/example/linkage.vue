@@ -31,7 +31,7 @@ export default {
       },
       usable: true,
       schema: {
-        form: { ui: { labelWidth: 200 }, inject: ['__usable'] },
+        form: { ui: { labelWidth: 200 }, inject: ['form', '__usable'] },
         fields: [{
           type: KeepForm.TYPE.RATE,
           field: 'rate',

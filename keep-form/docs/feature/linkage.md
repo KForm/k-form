@@ -12,6 +12,9 @@
 
 ```jsx
 <k-form :model="form" :schema="{
+  form: {
+    inject: ['form']
+  },
   fields: [{
     type: KForm.TYPE.SELECT,
     field: 'a',
@@ -67,33 +70,3 @@ ui: {
   $class: ["{{ form.a === form.b ? 'classA' : 'classB' }}', '{{ form.c === form.d ? 'classC' : 'classD' }}"]
 }
 ```
-
-##### 依赖注入
-
-KForm 默认情况下会将 model 属性注入到模板中：
-
-```jsx
-<k-form :model="form" :schema="{
-  fields: [{
-    type: KForm.TYPE.INPUT,
-    field: 'name',
-    label: '姓名：',
-    editable: '{{ form.age > 18 }}'
-  }]
-}" />
-```
-
-```js
-export default {
-  data() {
-    return {
-      form: {
-        name: '',
-        age: ''
-      }
-    }
-  }
-}
-```
-
-在上述例子中，form 将自动注入到模板字符串中作为其的作用域。也就是说，你可以在 `{{` `}}` 里面访问 form 的所有属性来完成联动。但在一些特殊场景下，我们可能还需要访问 `vue.$data` 的其他属性，甚至需要访问 `vue.computed` 和 `vue.methods` 来完成联动，这时候你需要手动将这些需要访问的内容注入到 KForm 中，见下例：
