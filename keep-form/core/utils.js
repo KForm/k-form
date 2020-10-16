@@ -70,7 +70,7 @@ export const handleExpression = (context, inject, expression) => {
   const matched = hasMatched(expression)
   if(matched) {
     const body = matched[1].trim()
-    let scope  =['form']
+    let scope  =[]
     for(let k in context) {
       if(inject.indexOf(k) > -1) {
         scope.push(k)
