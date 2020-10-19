@@ -16,10 +16,10 @@
 - [x] rate
 - [x] upload
 - [x] colorpicker
-- [ ] transfer 暂时不做
+- [x] transfer 暂时不做
 - [x] 自定义表单组件
-- [ ] 表单模式（transder 未做）
-- [ ] 表单联动
+- [x] 表单模式（transfer 不做）
+- [x] 表单联动
 - [ ] 复杂布局
 - [ ] 性能优化
 - [ ] 代码梳理
