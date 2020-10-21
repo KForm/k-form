@@ -15,7 +15,7 @@
 #### 方法
 
 支持 ref 的形式调用方法，支持 iview Input 组件的所有方法
-`this.$refs.form.$field('name').focus()`
+`this.$refs.form.$iview('name').focus()`
 
 #### 示例
 

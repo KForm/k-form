@@ -22,7 +22,7 @@ render -> 自定义 Option 的渲染内容，render 支持值渲染和函数渲�
 #### 方法
 
 支持 iview Select 组件的所有方法
-`this.$refs.form.$field('city').clearSingleSelect()`
+`this.$refs.form.$iview('city').clearSingleSelect()`
 
 #### 示例
 
