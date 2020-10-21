@@ -41,11 +41,11 @@ export default {
       type: [Boolean, String],
       default: false
     },
-    refName:{
-      type:String
+    refName: {
+      type: String
     },
-    groupName:{
-      type:String
+    groupName: {
+      type: String
     },
     component: {
     },
@@ -83,7 +83,7 @@ export default {
               style: propExpressionWrap(this.$context, this.$inject, this.$props.ui.$style),
               class: propExpressionWrap(this.$context, this.$inject, this.$props.ui.$class),
               on: {
-                input: e => this.formHanlder(this.field, e,this.refName,this.groupName),
+                input: e => this.formHanlder(this.field, e, this.refName, this.groupName),
                 ...this.$props.ui.$on
               },
               ref: `K-${this.field}`

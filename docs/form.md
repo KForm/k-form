@@ -27,15 +27,17 @@ schema | 表单生成的配置项，详细配置见「Schema」一章 | Object |
 ```
 
 ```js
-data() {
-  return {
-    schema: {
-      form: { ui: { labelPosition: 'left' }, layout: { span: '12' } },
-      fields: [{
-        type: KForm.TYPE.INPUT,
-        field: 'name',
-        label: '姓名：'
-      }]
+export default {
+  data() {
+    return {
+      schema: {
+        form: { ui: { labelPosition: 'left' }, layout: { span: '12' } },
+        fields: [{
+          type: KForm.TYPE.INPUT,
+          field: 'name',
+          label: '姓名：'
+        }]
+      }
     }
   }
 }

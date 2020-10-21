@@ -1,9 +1,9 @@
 import BaseForm from '../core/form'
 import Field from './field'
 import { mapSchemaRules2UI, isBoolean, hasMatched, deepClone, isObject, isArray , isFunction, findIndexOfandCheck } from '../core/utils'
-import {refName, _schema, _editable } from '../core/config'
+import { _schema, _editable } from '../core/config'
 
-let kf = new BaseForm(this)
+let kf = new BaseForm()
 
 const CARD_STYLE = 'overflow: hidden; margin-bottom: 15px;'
 
@@ -20,10 +20,6 @@ export default {
       type: Object,
       default: () => _schema
     },
-    refName: {
-      type: String,
-      default: kf.refName
-    }
   },
   computed: {
     formRules() {
@@ -108,7 +104,8 @@ export default {
               default:
                 return
             }
-          }else{
+          }
+          else {
             console.error(item.field + 'need a type')
             return
           }
@@ -150,7 +147,7 @@ export default {
       return this.$field(field).$iview()
     },
     $form() {
-      return this.$refs[refName]
+      return this.$refs[kf.refName]
     },
     refactorFields(field, info) {
       let fields = this.value.fields
@@ -275,7 +272,7 @@ export default {
   render(h) {
     return (
       <div class="form-wrap">
-        <Form ref={ refName } { ...{ props: { model: this.model, rules: this.formRules, ...(this.schema.form ? this.schema.form.ui : {}) } } } >
+        <Form ref={ kf.refName } { ...{ props: { model: this.model, rules: this.formRules, ...(this.schema.form ? this.schema.form.ui : {}) } } } >
           { this.renderField(this.schema.form || {}, this.schema.fields, h) }
           { this.$slots.default }
         </Form>
