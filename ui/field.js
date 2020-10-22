@@ -66,10 +66,11 @@ export default {
     }
   },
   render(h) {
-    const { $tooltip } = this.$props.ui
+    const { $tooltip, $divider } = this.$props.ui
     return (
       !handleExpression(this.$context, this.$inject, this.$props.hidden) ?
-        <i-col { ...{ props:propExpressionWrap(this.$context, this.$inject, this.layout || this.schema.form.layout) } } > 
+        <i-col { ...{ props: propExpressionWrap(this.$context, this.$inject, this.layout || this.schema.form.layout) } } >
+          { $divider ? <Divider { ...{ props: $divider } } >{ $divider.text }</Divider> : null }
           <form-item label = { propExpressionWrap(this.$context, this.$inject, this.label) } prop = { this.field } >
             { h(this.getFieldComponent(this.type), {
               attrs: {
