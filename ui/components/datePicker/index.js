@@ -24,7 +24,7 @@ export default {
     }
   },
   render(h) {
-    const { format,value,editable} = this.$attrs
+    const { format, value, editable, formatter } = this.$attrs
     return (
       editable ? <DatePicker {...{props: this.$attrs, on: this.$listeners}} onInput = { e => this.handleInput(e,format) } >
         { Object.keys(this.$attrs.slots).map(item => (
@@ -33,7 +33,7 @@ export default {
           </template>
         )) }
       </DatePicker>:
-      <p>{ this.format(value,format)}</p>
+      <p>{ formatter || this.format(value, format)}</p>
     )
   }
 }

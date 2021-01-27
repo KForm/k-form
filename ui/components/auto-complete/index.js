@@ -4,7 +4,7 @@ export default {
   name: TYPE.AUTO_COMPLETE,
   inheritAttrs: false,
   render(h) {
-    const { editable, slots, value } = this.$attrs
+    const { editable, slots, value, formatter } = this.$attrs
     return (
       editable ? <AutoComplete {...{ props: this.$attrs, on: this.$listeners }}>
         { Object.keys(slots).map(item => (
@@ -12,7 +12,7 @@ export default {
             { slots[item].render(h) }
           </template>
         )) }
-      </AutoComplete> : <p>{ value }</p>
+      </AutoComplete> : <p>{ formatter || value }</p>
     )
   }
 }

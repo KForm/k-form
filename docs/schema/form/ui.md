@@ -23,3 +23,11 @@ export default {
   }
 }
 ```
+
+### 组件形式
+
+> k-form 支持将 ui 所有配置直接应用于组件属性中，这在编写「组件形式」上非常有用
+
+```jsx
+<k-form :model="form" inline label-position="left" />
+```

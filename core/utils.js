@@ -16,12 +16,9 @@ export const iviewProps = (ctx, props) => {
   return wraps
 }
 
-export const mapSchemaRules2UI = (ctx, schema) => {
+export const mapSchemaRules2UI = (ctx, form = {}, schema = []) => {
+  let formRules = form.rules
   let rulesSet = {}
-  schema.map(item => {
-    item.rules && (rulesSet[item.field] = item.rules)
-    return
-  })
   let fields = ctx.$slots.default
   if(!fields || !fields.length) {
     fields = []
@@ -32,7 +29,11 @@ export const mapSchemaRules2UI = (ctx, schema) => {
     rules && (rulesSet[field] = rules)
     return
   })
-  return rulesSet
+  schema.map(item => {
+    item.rules && (rulesSet[item.field] = item.rules)
+    return
+  })
+  return { ...ctx.$props.rules, ...formRules, ...rulesSet }
 }
 
 export const slotsWrap = (ctx, slots) => {
@@ -141,11 +142,33 @@ export const findIndexOfandCheck = (index, fields, num = 0) => {
       target = scope[0]
       targetChildren = scope[1]
     }
-    let temp = fields.findIndex(item => item.field === target)
+    else {
+      target = scope[0]
+    }
+    let temp = undefined
+    let childIndex = undefined
+    for(let i = 0; i < fields.length; i++) {
+      let item = fields[i]
+      if(item.field === target) {
+        temp = i
+      }
+      else if(item.type === 'card' && item.fields) {
+        let childIndex = item.fields.findIndex(item => item.field === target)
+        if(childIndex > -1) {
+          return `${i}.${childIndex}`
+        }
+      }
+    }
+    if(temp !== undefined && childIndex !== undefined) {
+      console.error(`未找到 field 为 ${index} 的表单项`)
+      return
+    }
+    console.log(temp)
+    // let temp = fields.findIndex(item => item.field === target)
     if(temp > -1) {
       resIndex = temp
       if(targetChildren !== undefined) {
-        let childIndex = (fields[resIndex].fields || fields[resIndex].children.fields).findIndex(item => item.field === targetChildren)
+        let childIndex = fields[resIndex].fields.findIndex(item => item.field === targetChildren)
         if(childIndex === -1) {
           console.error(`未找到 field 为 ${index} 的表单项`)
           return

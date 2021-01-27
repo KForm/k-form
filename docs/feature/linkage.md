@@ -48,6 +48,7 @@ export default {
 ##### 支持模板字符串的属性
 
 * `schema.fields.editable`
+* `schema.fields.formatter`
 * `schema.fields.hidden`
 * `schema.fields.layout/*`
 * `schema.fields.label`
@@ -111,17 +112,17 @@ ui: {
 
 `this.$refs.form.insertField({ type: KForm.TYPE.INPUT, label: 'age', field: 'age' }, 'name')`
 
-##### 在指定组前插入字段
+##### 在指定组/列表前插入字段
 
 `this.$refs.form.insertField({ type: KForm.TYPE.INPUT, label: 'age', field: 'age' }, 'a')`
 
-##### 在指定组内的指定字段前插入字段
+##### 在指定组/列表内的指定字段前插入字段
 
 `this.$refs.form.insertField({ type: KForm.TYPE.INPUT, label: 'age', field: 'age' }, 'a.a1')`
 
 ##### 批量插入多个字段
 
-`this.$refs.form.insertField([{ type: KForm.TYPE.INPUT, label: 'age', field: 'age' }, type: KForm.TYPE.INPUT, label: 'address', field: 'address' } }], 'name')`
+`this.$refs.form.insertField([{ type: KForm.TYPE.INPUT, label: 'age', field: 'age' }, { type: KForm.TYPE.INPUT, label: 'address', field: 'address' }], 'name')`
 
 #### Form.deleteField 删除字段
 
@@ -135,7 +136,7 @@ ui: {
 
 `this.$refs.form.deleteField('name')`
 
-##### 删除一个组
+##### 删除一个组/列表
 
 `this.$refs.form.deleteField('a')`
 

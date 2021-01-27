@@ -4,7 +4,7 @@ export default {
   name: TYPE.INPUT,
   inheritAttrs: false,
   render(h) {
-    const { editable, field, slots, value } = this.$attrs
+    const { editable, field, slots, value, formatter } = this.$attrs
     return (
       editable ? <Input {...{ props: this.$attrs, on: this.$listeners, ref: field}}>
         { Object.keys(slots).map(item => (
@@ -12,7 +12,7 @@ export default {
             { slots[item].render(h) }
           </template>
         )) }
-      </Input> : <p>{ value }</p>
+      </Input> : <p>{ formatter || value }</p>
     )
   }
 }

@@ -5,8 +5,10 @@
       - form
         - [ui](/schema/form/ui.md)
         - [layout](/schema/form/layout.md)
+        - [rules](/schema/form/rules)
         - [editable](/schema/form/editable.md)
         - [inject](/schema/form/inject.md)
+        - [优先级](/schema/form/priority.md)
       - fields
         - [type](/schema/fields/type.md)
         - [field](/schema/fields/field.md)
@@ -16,6 +18,7 @@
         - [rules](/schema/fields/rules)
         - [editable](/schema/fields/editable)
         - [hidden](/schema/fields/hidden)
+        - [formatter](/schema/fields/formatter)
     - [Field](/field.md)
 - UI 组件
     - [AutoComplete](/component/auto-complete.md)
@@ -35,6 +38,7 @@
     - [Upload](/component/upload.md)
     - [Widget](/component/widget.md)
 - 特性
+    - [组件](/feature/component.md)
     - [布局](/feature/layout.md)
     - [组件实例](/feature/ref.md)
     - [表单校验](/feature/validate.md)

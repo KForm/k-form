@@ -100,7 +100,7 @@ export default {
 
 ### 在复杂布局中获取实例
 
-#### 在 `type = Object` 中获取实例
+#### 在 `type = object` 中获取实例
 
 ```jsx
 <k-form ref="form" :model="{
@@ -117,7 +117,7 @@ export default {
       schema: {
         fields: [{
           field: 'a',
-          type: 'Object',
+          type: 'object',
           fields: [{
             type: KForm.TYPE.INPUT,
             field: 'a1',
@@ -135,7 +135,7 @@ export default {
 }
 ```
 
-#### 在 `type = Array` 中获取实例
+#### 在 `type = array` 中获取实例
 
 ```jsx
 <k-form ref="form" :model="{
@@ -155,14 +155,12 @@ export default {
       schema: {
         fields: [{
           field: 'a',
-          type: 'Array',
-          children: {
-            fields: [{
-              type: KForm.TYPE.INPUT,
-              field: 'a1',
-              label: 'a1'
-            }]
-          }
+          type: 'array',
+          fields: [{
+            type: KForm.TYPE.INPUT,
+            field: 'a1',
+            label: 'a1'
+          }]
         }] 
       }
     }

@@ -46,3 +46,24 @@ export default {
   }
 }
 ```
+
+### 规则
+
+各组件在 `editable = false` 模式下的翻译规则如下：
+
+* `KForm.TYPE.AUTO_COMPLETE -> value -> 值`
+* `KForm.TYPE.CASCADER -> 根据 value 逐级找到所对应的 label，并用 / 拼接 -> 选项1 / 选项2 / 选项3`
+* `KForm.TYPE.CHECKBOX -> 独立模式返回是或否；组模式根据 $data 找到 id 所对应的 name，并用，拼接  -> 是；选项1，选项2，选项3`
+* `KForm.TYPE.COLOR_PICKER -> value -> 值`
+* `KForm.TYPE.DATEPICKER -> moment 格式化 value -> 2020-11-10`
+* `KForm.TYPE.INPUT -> value -> 值`
+* `KForm.TYPE.INPUT_NUMBER -> value -> 值`
+* `KForm.TYPE.RADIO -> 根据 $data 找到 id 所对应的 name -> 选项1`
+* `KForm.TYPE.RATE -> disabled = true`
+* `KForm.TYPE.SELECT -> 根据 $data 找到 id 所对应的 name -> 选项1`
+* `KForm.TYPE.SLIDER -> range = true 用 ~ 拼接两个端点；range = false 返回 value -> 1 ~ 100；80`
+* `KForm.TYPE.SWITCH -> 返回是或否 -> 是`
+* `KForm.TYPE.TEXT -> value -> 值`
+* `KForm.TYPE.TIMEPICKER -> value -> 09:41:00`
+* `KForm.TYPE.UPLOAD -> 返回图片列表，可处理删除、下载、打开链接等操作`
+* `KForm.TYPE.WIDGET -> 不支持，需要自行处理`

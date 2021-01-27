@@ -240,31 +240,3 @@ export default {
   }
 }
 ```
-
-### 分割线 $divider
-
-有时候我们想在某个字段前插入一个分割线（或标题），但又不想使用 `Object` 分组，这时候可以利用 `$divider` 特性。该特性会在字段（`iview.FormItem`）的前面插入一个 `iview.Divider`。支持 `iview.Divider` 的全部属性，额外提供 `text` 属性用来展示文本
-
-```js
-export default {
-  data() {
-    return {
-      schema: {
-        fields: [{
-          type: KForm.TYPE.INPUT,
-          field: 'name',
-          label: '姓名：',
-          ui: {
-            $divider: {
-              text: '用户名称',
-              orientation: 'left'
-            }
-          }
-        }] 
-      }
-    }
-  }
-}
-```
-
-

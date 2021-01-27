@@ -5,11 +5,11 @@ export default {
   name: TYPE.RADIO,
   inheritAttrs: false,
   render(h) {
-    const { $data, value, editable } = this.$attrs
+    const { $data, value, editable, formatter } = this.$attrs
     return (
       editable ? <RadioGroup {...{ props: this.$attrs, on: this.$listeners}} >
         { $data.map(item => <Radio key = { item.id } label = { item.id } disabled = { item.disabled } true-value = { 'Number' } false-value = { 'Number' }>{ item.name }</Radio>) }
-      </RadioGroup> : <p>{ translateId2Name($data, value) }</p>
+      </RadioGroup> : <p>{ formatter || translateId2Name($data, value) }</p>
     )
   }
 }

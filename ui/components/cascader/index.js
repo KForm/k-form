@@ -35,11 +35,11 @@ export default {
   },
 
   render(h) {
-    const {data, editable, field } = this.$attrs
+    const { data, editable, field, formatter } = this.$attrs
     return (
       editable ?
         <Cascader {...{ props: this.$attrs, on: this.$listeners, ref: field}} /> : 
-        <p>{ this.findResult(data, JSON.parse(JSON.stringify(this.$attrs.value))).join(' / ') }</p>
+        <p>{ formatter || this.findResult(data, JSON.parse(JSON.stringify(this.$attrs.value))).join(' / ') }</p>
     )
   }
 }

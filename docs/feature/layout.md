@@ -45,13 +45,13 @@ export default {
 
 ### 复杂布局
 
-将 schema.fields[n] 包裹一层，提供了 ui、field、type、fields、children 字段
+将 schema.fields[n] 包裹一层，提供了 ui、subui、field、type、fields 字段
 
 * ui：支持 `iview.Card` 的所有属性和插槽，同 `schema.fields[n].ui`，新增 $footer（`function`、`component`） 属性用来渲染卡片底部视图
 * field：同 `schema.fields[n].field`，分组的 field，组内所有字段将绑定到这个组 field 对象内
-* type：可选 `'Object'` 和 `Array`，布局的类型，可选分组模式和列表模式
-* fields：`Object` 模式下生效，该分组下的字段配置项，同 `schema.fields`
-* children: `Array` 模式下生效，可配置 ui（每一列表项的卡片配置）、fields（每一列表项的字段配置项）
+* type：可选 `'object'`、`array`、`card`，布局的类型，可选分组模式、列表模式、卡片模式
+* fields：字段配置项，同 `schema.fields`
+* subui: `array` 模式下生效，可配置每一列表项的卡片属性
 
 #### 分组布局
 
@@ -78,7 +78,7 @@ export default {
             bordered: false
           },
           field: 'a',
-          type: 'Object',
+          type: 'object',
           fields: [{
             type: KForm.TYPE.INPUT
             field: 'a1',
@@ -127,26 +127,69 @@ export default {
             title: 'a 列表',
             bordered: false
           },
-          field: 'a',
-          type: 'Array',
-          children: {
-            ui: {
-              title: '子列'
-            },
-            fields: [{
-              type: KForm.TYPE.INPUT
-              field: 'a1',
-              label: 'a1'
-            }, {
-              type: KForm.TYPE.INPUT
-              field: 'a2',
-              label: 'a2'
-            }, {
-              type: KForm.TYPE.INPUT
-              field: 'a3',
-              label: 'a3'
-            }]
+          subui: {
+            title: '子列'
           },
+          field: 'a',
+          type: 'array',
+          fields: [{
+            type: KForm.TYPE.INPUT
+            field: 'a1',
+            label: 'a1'
+          }, {
+            type: KForm.TYPE.INPUT
+            field: 'a2',
+            label: 'a2'
+          }, {
+            type: KForm.TYPE.INPUT
+            field: 'a3',
+            label: 'a3'
+          }]
+        }]
+      }
+    }
+  }
+}
+```
+
+#### 卡片布局
+
+将独立的几个字段用卡片包裹起来，同 `object` 类型，却不需改变数据结构
+
+```jsx
+<k-form :model="{
+  a: {
+    a1: '',
+    a2: '',
+    a3: ''
+  }
+}" v-model="schema" />
+```
+
+```js
+export default {
+  data() {
+    return {
+      schema: {
+        fields: [{
+          ui:{
+            title: 'a 组',
+            bordered: false
+          },
+          type: 'card',
+          fields: [{
+            type: KForm.TYPE.INPUT
+            field: 'a1',
+            label: 'a1'
+          }, {
+            type: KForm.TYPE.INPUT
+            field: 'a2',
+            label: 'a2'
+          }, {
+            type: KForm.TYPE.INPUT
+            field: 'a3',
+            label: 'a3'
+          }]
         }]
       }
     }
@@ -183,7 +226,7 @@ export default {
           field: 'a',
           label: 'a'
         }, {
-          type: 'Object',
+          type: 'object',
           field: 'b',
           ui: {
             title: 'b 信息组'
@@ -198,32 +241,44 @@ export default {
             label: 'b2'
           }]
         }, {
-          type: 'Array',
+          type: 'array',
           field: 'c',
           ui: {
             title: 'c 信息组',
             $footer: h => <Button onClick = { () => this.form.c.push({ c1: '', c2: '' }) }>新增</Button>
           },
-          children: {
-            ui: {
-              $slots: [{
-                name: 'title',
-                render: (h, index) => <p>c 信息组 {index + 1}</p>
-              }, {
-                name: 'extra',
-                render: (h, index) => <Button onClick = { () => this.form.c.splice(index, 1) } >删除</Button>
-              }],
-            },
-            fields: [{
-              type: KForm.TYPE.INPUT,
-              field: 'c1',
-              label: 'c1'
+          subui: {
+            $slots: [{
+              name: 'title',
+              render: (h, index) => <p>c 信息组 {index + 1}</p>
             }, {
-              type: KForm.TYPE.INPUT,
-              field: 'c2',
-              label: 'c2'
-            }]
+              name: 'extra',
+              render: (h, index) => <Button onClick = { () => this.form.c.splice(index, 1) } >删除</Button>
+            }],
+          },
+          fields: [{
+            type: KForm.TYPE.INPUT,
+            field: 'c1',
+            label: 'c1'
+          }, {
+            type: KForm.TYPE.INPUT,
+            field: 'c2',
+            label: 'c2'
+          }]
+        }, {
+          type: 'card',
+          ui: {
+            title: 'd 信息组'
           }
+          fields: [{
+            type: KForm.TYPE.INPUT,
+            field: 'd1',
+            label: 'd1'
+          }, {
+            type: KForm.TYPE.INPUT,
+            field: 'd2',
+            label: 'd2'
+          }]
         }]
       }
     }

@@ -4,7 +4,7 @@ export default {
   name: TYPE.TIMEPICKER,
   inheritAttrs: false,
   render(h) {
-    const { value, editable } = this.$attrs
+    const { value, editable, formatter } = this.$attrs
     return (
       editable ? <TimePicker {...{ props: this.$attrs, on: this.$listeners}}>
         { Object.keys(this.$attrs.slots).map(item => (
@@ -13,7 +13,7 @@ export default {
           </template>
         )) }
       </TimePicker>:
-      <p>{ value }</p>
+      <p>{ formatter || value }</p>
     )
   }
 }

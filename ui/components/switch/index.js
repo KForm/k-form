@@ -5,7 +5,7 @@ export default {
   name: TYPE.SWITCH,
   inheritAttrs: false,
   render(h) {
-    const { editable, slots, value } = this.$attrs
+    const { editable, slots, value, formatter } = this.$attrs
     return (
       editable ? <i-switch {...{ props: this.$attrs, on: this.$listeners}}>
         { Object.keys(slots).map(item => (
@@ -13,7 +13,7 @@ export default {
             { slots[item].render(h) }
           </template>
         )) }
-      </i-switch> : <p>{ isBoolean(value) ? value ? '是' : '否' : '' }</p>
+      </i-switch> : <p>{ formatter || (isBoolean(value) ? value ? '是' : '否' : '') }</p>
     )
   }
 }

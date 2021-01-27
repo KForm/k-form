@@ -6,9 +6,15 @@
 
 `KForm.TYPE.CHECKBOX`
 
+### 独立 Checkbox 组件与组 CheckboxGroup 组件
+
+通常情况下我们会用一个数组存储一组 checkbox 的勾选结果，但也会有单独使用 checkbox 的场景。
+
+将数据源绑定为数组类型，k-form 将会开启 `iview.CheckboxGroup` 模式；将数据源绑定为布尔类型，k-form 将会开启 `iview.Checkbox` 模式。
+
 ### 属性
 
-支持 `iview.CheckboxGroup` 的所有属性。`ui.$data` 中支持配置 `iview.Checkbox` 的 `id -> value`、`name -> label`、`disabled` 属性，并额外提供 `render` 属性用于渲染自定义 `iview.Checkbox` 内容。
+组模式支持 `iview.CheckboxGroup` 的所有属性。`ui.$data` 中支持配置 `iview.Checkbox` 的 `id -> value`、`name -> label`、`disabled` 属性，并额外提供 `render` 属性用于渲染自定义 `iview.Checkbox` 内容；独立模式支持 `iview.Checkbox` 的所有属性，`ui.$data` 失效，可以使用 `ui.$slots` 渲染自定义内容。
 
 注意 ⚠️
 
@@ -16,7 +22,7 @@ render 支持值渲染和函数渲染，需要注意的是，函数渲染若想�
 
 ### 事件
 
-支持 `iview.CheckboxGroup` 的所有事件，不支持 `iview.Checkbox` 的事件
+组模式支持 `iview.CheckboxGroup` 的所有事件，不支持 `iview.Checkbox` 的事件；独立模式支持 `iview.Checkbox` 的所有事件。
 
 ### 示例
 
@@ -24,6 +30,10 @@ render 支持值渲染和函数渲染，需要注意的是，函数渲染若想�
 export default {
   data() {
     return {
+      form: {
+        favorite: [],
+        isTrue: false
+      },
       schema: {
         fields: [{
           type: KForm.TYPE.CHECKBOX,
@@ -37,6 +47,15 @@ export default {
               { id: 2, name: '葡萄', render: function() { return <span><Icon type = "md-home" /><span>{ this.name }</span></span>} }
               { id: 3, name: '菠萝', disabled: true }
             ]
+            $on: {
+              'on-change': e => console.log(e),
+            }
+          }
+        }, {
+          type: KForm.TYPE.CHECKBOX,
+          field: 'isTrue',
+          label: '是否正确',
+          ui: {
             $on: {
               'on-change': e => console.log(e),
             }

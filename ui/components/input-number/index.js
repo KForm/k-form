@@ -4,9 +4,9 @@ export default {
   name: TYPE.INPUT_NUMBER,
   inheritAttrs: false,
   render(h) {
-    const { editable, value } = this.$attrs
+    const { editable, value, formatter } = this.$attrs
     return (
-      editable ? <InputNumber {...{ props: this.$attrs, on: this.$listeners}}/> : <p>{ value }</p>
+      editable ? <InputNumber {...{ props: this.$attrs, on: this.$listeners}}/> : <p>{ formatter || value }</p>
     )
   }
 }

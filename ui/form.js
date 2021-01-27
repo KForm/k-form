@@ -1,11 +1,12 @@
 import BaseForm from '../core/form'
 import Field from './field'
-import { mapSchemaRules2UI, isBoolean, hasMatched, deepClone, isObject, isArray , isFunction, findIndexOfandCheck } from '../core/utils'
-import { _schema, _editable } from '../core/config'
+import { mapSchemaRules2UI, isNull, isBoolean, hasMatched, deepClone, isObject, isArray , isFunction, findIndexOfandCheck } from '../core/utils'
+import { _schema, _editable, _layout } from '../core/config'
+import './style/form.less'
 
 let kf = new BaseForm()
 
-const CARD_STYLE = 'overflow: hidden; margin-bottom: 15px;'
+const CARD_STYLE = 'display: table; width: 100%; margin-bottom: 15px;'
 
 export default {
   components: {
@@ -20,10 +21,26 @@ export default {
       type: Object,
       default: () => _schema
     },
+    rules: {
+      type: Object,
+      default: () => ({})
+    },
+    ui: {
+      type: Object,
+      default: () => ({})
+    },
+    layout: {
+      type: Object,
+      default: () => _layout
+    },
+    editable: {
+      type: Boolean,
+      default: _editable
+    },
   },
   computed: {
     formRules() {
-      return mapSchemaRules2UI(this, this.schema.fields)
+      return mapSchemaRules2UI(this, this.schema.form, this.schema.fields)
     },
     schema() {
       return this.value
@@ -31,7 +48,7 @@ export default {
   },
   provide() {
     return {
-      formHanlder: (field, e,ref,groupName) => {
+      formHanlder: (field, e, ref, groupName) => {
         if(groupName && ref.indexOf('-') > -1) {
           let index = ref.substring(ref.indexOf('-') + 1, ref.length)
           this.model[groupName][index][field] = e
@@ -45,22 +62,22 @@ export default {
         }
       },
       $context: this.$parent,
-      $inject: this.schema.form.inject,
+      $inject: (this.schema.form || {}).inject,
       deleteField: this.deleteField,
       updateField: this.updateField
     }
   },
   methods: {
-    renderFooter(field, h) {
-      if(!field || !field.ui) {
+    renderFooter(field, h, uk = 'ui') {
+      if(!field || !field[uk]) {
         return
       }
-      let renderFooter = field.ui.$footer
+      let renderFooter = field[uk].$footer
       return renderFooter ? isFunction(renderFooter) ? renderFooter(h) : renderFooter : null
     },
-    renderField(form, field, _h, refIndex, groupName) {
+    renderField(form, field, _h, refIndex, groupName, model) {
       return field.map((item, i) => {
-        if(isObject(item) && (item.hasOwnProperty('children') || item.hasOwnProperty('fields'))) {
+        if(isObject(item) && item.hasOwnProperty('fields')) {
           if(item.hasOwnProperty('type') && typeof item.type === 'string') {
             switch (item.type.toLowerCase()) {
               case 'array': {
@@ -75,17 +92,17 @@ export default {
                     </template>
                   )) }
                   { this.model[item.field].map((modelItem, index) => {
-                    return item.children && <Card { ...{ props: item.children.ui } } style = { CARD_STYLE } >
+                    return item.subui && <Card { ...{ props: item.subui } } style = { CARD_STYLE } >
                       <template slot="default">
-                        { this.renderField(form,item.children.fields, _h, index, item.field) }
+                        { this.renderField(form,item.fields, _h, index, item.field, this.model[item.field][index]) }
                       </template>
-                      { item.children.ui.$slots && Object.keys(item.children.ui.$slots).map(csi => (
-                        <template slot = { item.children.ui.$slots[csi].name } >
-                          { item.children.ui.$slots[csi].render(_h, index) }
+                      { item.subui.$slots && Object.keys(item.subui.$slots).map(csi => (
+                        <template slot = { item.subui.$slots[csi].name } >
+                          { item.subui.$slots[csi].render(_h, index) }
                         </template>
                         
                       )) }
-                      { this.renderFooter(item.children, _h) }
+                      { this.renderFooter(item, _h, 'subui') }
                     </Card>
                   }) }
                   { this.renderFooter(item, _h) }
@@ -97,7 +114,14 @@ export default {
                 }
                 return  <Card { ...{ props: item.ui } } style = { CARD_STYLE } >
                   <template slot="default">
-                    { this.renderField(form,item.fields, _h, undefined, item.field) }
+                    { this.renderField(form, item.fields, _h, undefined, item.field, this.model[item.field]) }
+                  </template>
+                </Card>
+              }
+              case 'card': {
+                return <Card { ...{ props: item.ui } } style = { CARD_STYLE } >
+                  <template slot="default">
+                    { this.renderField(form, item.fields, _h, undefined, undefined, this.model) }
                   </template>
                 </Card>
               }
@@ -120,6 +144,7 @@ export default {
               refName = `${groupName}.${item.field}`
             }
           }
+          const { editable, layout } = this.$props
           return (
             <Field
               ref = { refName }
@@ -128,11 +153,12 @@ export default {
               type = { item.type }
               field = { item.field }
               label = { item.label }
-              value = { this.model[item.field] }
+              value = { model[item.field] }
               ui = { item.ui }
-              layout = { item.layout || form.layout }
+              layout = { item.layout || (!isNull(form.layout) ? form.layout : layout) }
               rules = { item.rules }
-              editable = { hasMatched(item.editable) ? item.editable : isBoolean(item.editable) ? item.editable : isBoolean(item.editable) ? form.editable : _editable }
+              editable = { hasMatched(item.editable) ? item.editable : isBoolean(item.editable) ? item.editable : isBoolean(form.editable) ? form.editable : isBoolean(editable) ? editable : _editable }
+              formatter = { item.formatter }
               hidden = { item.hidden }
               component = { item.component }
             />
@@ -152,21 +178,35 @@ export default {
     refactorFields(field, info) {
       let fields = this.value.fields
       const refactorField = (field, item, info) => {
-        let scope = field.split('.')
-        if(scope.length > 1) {
-          if(item.fields) {
-            let name = scope[1]
-            let rawIndex = item.fields.findIndex(v => v.field === name)
-            item.fields[rawIndex] = { ...item.fields[rawIndex], ...info }
-            return item
+        switch(item.type) {
+          case 'array':
+          case 'object': {
+            let scope = field.split('.')
+            if(scope.length > 1) {
+              if(item.fields) {
+                let name = scope[1]
+                let key = scope[0]
+                if(key === item.field) {
+                  let rawIndex = item.fields.findIndex(v => v.field === name)
+                  item.fields[rawIndex] = { ...item.fields[rawIndex], ...info }
+                  return item
+                }
+              }
+            }
+            break
           }
-          if(item.children) {
-            let name = scope[1]
-            let rawIndex = item.children.fields.findIndex(v => v.field === name)
-            item.children.fields[rawIndex] = { ...item.children.fields[rawIndex], ...info }
+          case 'card': {
+            if(item.fields) {
+              let rawIndex = item.fields.findIndex(v => v.field === field)
+              rawIndex > -1 && (item.fields[rawIndex] = { ...item.fields[rawIndex], ...info })
+              return item
+            }
+            break
+          }
+          default: {
+            if(item.field === field) return Object.assign(item, info)
           }
         }
-        if(item.field === field) return Object.assign(item, info)
         return item
       }
       if(isObject(field)) {
@@ -193,8 +233,8 @@ export default {
               let resIndex = findIndexOfandCheck(item, fields, index)
               if(resIndex === undefined) return
               if(typeof resIndex === 'string') {
-                let idx = resIndex.split('.');
-                (fields[idx[0]].fields || fields[idx[0]].children.fields).splice(idx[1], 1)
+                let idx = resIndex.split('.')
+                fields[idx[0]].fields.splice(idx[1], 1)
               }
               else {
                 fields.splice(resIndex, 1)
@@ -206,8 +246,8 @@ export default {
             let resIndex = findIndexOfandCheck(index, fields)
             if(resIndex === undefined) return
             if(typeof resIndex === 'string') {
-              let idx = resIndex.split('.');
-              (fields[idx[0]].fields || fields[idx[0]].children.fields).splice(idx[1], 1)
+              let idx = resIndex.split('.')
+              fields[idx[0]].fields.splice(idx[1], 1)
             }
             else {
               fields.splice(resIndex, 1)
@@ -236,8 +276,8 @@ export default {
           resIndex = findIndexOfandCheck(index, fields)
           if(resIndex === undefined) return
           if(typeof resIndex === 'string') {
-            let idx = resIndex.split('.');
-            (fields[idx[0]].fields || fields[idx[0]].children.fields).splice(idx[1], 0, ...insertItem)
+            let idx = resIndex.split('.')
+            fields[idx[0]].fields.splice(idx[1], 0, ...insertItem)
           }
           else {
             fields.splice(resIndex, 0, ...insertItem)
@@ -270,10 +310,17 @@ export default {
     }
   },
   render(h) {
+    const { ui } = (this.schema.form || {})
+    const nativeProps = {
+      ...this.$props.ui,
+      ...( ui || {} ),
+      model: this.model,
+      rules: this.formRules
+    }
     return (
-      <div class="form-wrap">
-        <Form ref={ kf.refName } { ...{ props: { model: this.model, rules: this.formRules, ...(this.schema.form ? this.schema.form.ui : {}) } } } >
-          { this.renderField(this.schema.form || {}, this.schema.fields, h) }
+      <div class="k-form">
+        <Form ref={ kf.refName } { ...{ props: nativeProps } } >
+          { this.renderField(this.schema.form || {}, this.schema.fields || [], h, undefined, undefined, this.model) }
           { this.$slots.default }
         </Form>
       </div>

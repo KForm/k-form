@@ -17,8 +17,12 @@ export default {
 
 属性 | 说明 | 类型 | 默认值
 ----|-----|------|------
-model | 同 iview.Form 的 model，用于绑定表单数据源 | Object | -
-schema | 表单生成的配置项，详细配置见「Schema」一章 | Object | -
+model | 同 iview.Form 的 model，用于绑定表单数据源 | Object | {}
+value | 表单生成的配置项，详细配置见「Schema」一章 | Object | -
+ui | iview.Form 组件属性配置 | Object | {}
+rules | 表单全局校验配置，同 iview.Form.rules | Object | {}
+layout | iview.Col 布局配置 | Object | { span: '12' }
+editable | 表单全局是否可以编辑 | Boolean | true
 
 ### 示例
 
