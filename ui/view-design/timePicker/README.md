@@ -24,7 +24,7 @@
 
 ```
 {
-  type: KeepForm.TYPE.TIMEPICKER,
+  type: KeepForm.TYPE.TIME_PICKER,
   field: 'time',
   label: 'time',
   layout:{

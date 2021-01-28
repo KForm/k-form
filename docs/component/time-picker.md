@@ -30,7 +30,7 @@ export default {
           inject: ['open']
         },
         fields: [{
-          type: KForm.TYPE.TIMEPICKER,
+          type: KForm.TYPE.TIME_PICKER,
           field: 'time',
           label: 'time',
           ui: {

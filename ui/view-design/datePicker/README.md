@@ -25,7 +25,7 @@ format同时支持对value的格式化
 
 ```
 [{
-  type: KeepForm.TYPE.DATEPICKER,
+  type: KeepForm.TYPE.DATE_PICKER,
   field: 'date2',
   label: 'date2',
   layout:{

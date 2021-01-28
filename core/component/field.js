@@ -1,8 +1,8 @@
-import { TYPE } from '../core/types'
-import components from './components'
-import { slotsWrap, propExpressionWrap, isObject } from '../core/utils'
-import { _layout, _editable } from '../core/config'
-import './style/field.less'
+import { TYPE } from '../types'
+import components from '../../ui/view-design'
+import { slotsWrap, propExpressionWrap, isObject } from '../utils'
+import { _layout, _editable } from '../config'
+import '../../ui/style/field.less'
 
 export default {
   props: {
@@ -37,7 +37,7 @@ export default {
       type: [Boolean, String],
       default: _editable
     },
-    formatter: {
+    format: {
       type: String,
       default: ''
     },
@@ -82,7 +82,7 @@ export default {
                 ...propExpressionWrap(this.$context, this.$inject, this.$props.ui),
                 field: this.$props.field,
                 editable: propExpressionWrap(this.$context, this.$inject, this.$props.editable),
-                formatter: propExpressionWrap(this.$context, this.$inject, this.$props.formatter),
+                _formatter: propExpressionWrap(this.$context, this.$inject, this.$props.formatter),
                 component: this.$props.component
               },
               style: propExpressionWrap(this.$context, this.$inject, this.$props.ui.$style),

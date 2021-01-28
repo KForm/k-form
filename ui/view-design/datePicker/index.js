@@ -2,7 +2,7 @@ import { TYPE } from '../../../core/types'
 import Kmoment from '../../../core/kmoment'
 
 export default {
-  name: TYPE.DATEPICKER,
+  name: TYPE.DATE_PICKER,
   inheritAttrs: false,
   computed:{
     format(){
@@ -24,7 +24,7 @@ export default {
     }
   },
   render(h) {
-    const { format, value, editable, formatter } = this.$attrs
+    const { format, value, editable, _formatter } = this.$attrs
     return (
       editable ? <DatePicker {...{props: this.$attrs, on: this.$listeners}} onInput = { e => this.handleInput(e,format) } >
         { Object.keys(this.$attrs.slots).map(item => (
@@ -33,7 +33,7 @@ export default {
           </template>
         )) }
       </DatePicker>:
-      <p>{ formatter || this.format(value, format)}</p>
+      <p>{ _formatter || this.format(value, format)}</p>
     )
   }
 }

@@ -1,8 +1,9 @@
-import BaseForm from '../core/form'
+import BaseForm from '../form'
 import Field from './field'
-import { mapSchemaRules2UI, isNull, isBoolean, hasMatched, deepClone, isObject, isArray , isFunction, findIndexOfandCheck } from '../core/utils'
-import { _schema, _editable, _layout } from '../core/config'
-import './style/form.less'
+import { mapSchemaRules2UI, isNull, isBoolean, hasMatched, deepClone, isObject, isArray , isFunction, findIndexOfandCheck } from '../utils'
+import { _schema, _editable, _layout } from '../config'
+import '../../ui/style/form.less'
+import '../../ui/view-design/style.less'
 
 let kf = new BaseForm()
 

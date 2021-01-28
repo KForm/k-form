@@ -1,10 +1,10 @@
 import { TYPE } from '../../../core/types'
 
 export default {
-  name: TYPE.TIMEPICKER,
+  name: TYPE.TIME_PICKER,
   inheritAttrs: false,
   render(h) {
-    const { value, editable, formatter } = this.$attrs
+    const { value, editable, _formatter } = this.$attrs
     return (
       editable ? <TimePicker {...{ props: this.$attrs, on: this.$listeners}}>
         { Object.keys(this.$attrs.slots).map(item => (
@@ -13,7 +13,7 @@ export default {
           </template>
         )) }
       </TimePicker>:
-      <p>{ formatter || value }</p>
+      <p>{ _formatter || value }</p>
     )
   }
 }

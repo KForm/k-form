@@ -44,7 +44,7 @@ export default {
 * `KForm.TYPE.CASCADER -> 'k-cascader' -> iview.Cascader`
 * `KForm.TYPE.CHECKBOX -> 'k-checkbox' -> iview.Checkbox`
 * `KForm.TYPE.COLOR_PICKER -> 'k-color-picker' -> iview.ColorPicker`
-* `KForm.TYPE.DATEPICKER -> 'k-date-picker' -> iview.DatePicker`
+* `KForm.TYPE.DATE_PICKER -> 'k-date-picker' -> iview.DatePicker`
 * `KForm.TYPE.INPUT -> 'k-input' -> iview.Input`
 * `KForm.TYPE.INPUT_NUMBER -> 'k-input-number' -> iview.InputNumber`
 * `KForm.TYPE.RADIO -> 'k-radio' -> iview.Radio`
@@ -53,6 +53,6 @@ export default {
 * `KForm.TYPE.SLIDER -> 'k-slider' -> iview.Slider`
 * `KForm.TYPE.SWITCH -> 'k-switch' -> iview.Switch`
 * `KForm.TYPE.TEXT -> 'k-text' -> p`
-* `KForm.TYPE.TIMEPICKER -> 'k-time-picker' -> iview.TimePicker`
+* `KForm.TYPE.TIME_PICKER -> 'k-time-picker' -> iview.TimePicker`
 * `KForm.TYPE.UPLOAD -> 'k-upload' -> KeepFe.Upload`
 * `KForm.TYPE.WIDGET -> 'k-widget' -> 自定义组件`

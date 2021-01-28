@@ -10,7 +10,7 @@ export default {
     }
   },
   render(h) {
-    const { $data, value, editable, field, slots, multiple, formatter } = this.$attrs
+    const { $data, value, editable, field, slots, multiple, _formatter } = this.$attrs
     return (
       editable ? <Select {...{ props: this.$attrs, on: this.$listeners, ref: field}} >
         { isObject($data) ? 
@@ -24,7 +24,7 @@ export default {
             { slots[item].render(h) }
           </template>
         )) }
-      </Select> : <p>{ formatter || (isObject($data) ? translateId2NameByGroup($data, value, multiple) : translateId2Name($data, value, multiple)) }</p>
+      </Select> : <p>{ _formatter || (isObject($data) ? translateId2NameByGroup($data, value, multiple) : translateId2Name($data, value, multiple)) }</p>
     )
   }
 }
