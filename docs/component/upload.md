@@ -1,43 +1,41 @@
-# Upload
+### upload 组件
 
-> KeepFe.Upload 组件
+#### 属性
+基于 [Keep 组件上传](https://tech-docs.gotokeep.com/keepfe/#/zh-cn/plugin/upload?id=avue%e6%96%b9%e6%a1%88%ef%bc%9a) 方案进行封装
 
-具体请参考 [Keep vue 组件上传](https://tech-docs.gotokeep.com/keepfe/#/zh-cn/plugin/upload?id=avue%e6%96%b9%e6%a1%88%ef%bc%9a)
-
-### 属性
-
-支持 `KeepFe.Upload` 的所有属性，`KeepFe.Upload` 的 `onComplete` 属性改为 `on-complete` 事件
-
-额外添加 `canView`、 `canDelete`、`canDownload` 属性
-
-| 事件        | 类型    |  备注  |
+| 属性        | 类型    |  说明  |
 | --------   | -----: | :----: |
-| canView   | boolean | 是否显示已上传的文件 |
-| canDelete   | boolean | 是否可删除 |
-| canDownload   | boolean | 是否显示「删除」按钮 |
+| exts   | Array |允许上传的文件格式 |
+| mode | String | 上传类型，支持 QINIU/KEEP，默认 QINIU|
+| disableDownload | Boolean | 附件是否禁用下载|
+| disableDelete | Boolean | 附件是否禁用删除|
 
-### 事件
+#### 事件
+| 事件        | 类型    |  返回值  |
+| --------   | -----: | :----: |
+| on-download   | function |文件信息 |
+| on-delete   | function | 文件索引 |
 
-| 事件        | 类型    |  返回值  |  备注  |
-| --------   | -----: | :----: |:----: |
-| on-complete   | function | 上传结果 res| 上传完成结果，返回 res |
-| on-download   | function | 当前文件 key 和 url | 上传附件下载 |
+#### 插槽
+暂无
 
-### 示例
 
-```js
+#### 示例
+
+```
 export default {
   data() {
     return {
       schema: {
         fields: [{
           type: KeepForm.TYPE.UPLOAD,
-          field: 'file',
+          field: 'value',
           label: '附件',
-          ui: {
-            isDrag: true,
-            $on: {
-              'on-download': e => window.open(e.url)
+          ui:{
+            exts: ['png', 'jpg'],
+            disableDelete: true,
+            $on:{
+              'on-download':this.handleDownload
             }
           }
         }]

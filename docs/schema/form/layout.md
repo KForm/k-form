@@ -44,3 +44,34 @@ export default {
   }
 }
 ```
+
+> Gutter
+
+与 `iview.Row.gutter` 不同，该属性将作用于每个 `iview.FormItem` 中，为表单元素添加内边距。
+
+```js
+export default {
+  data() {
+    return {
+      schema: {
+        form: {
+          layout: {
+            span: '12',
+            gutter: 20
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+最终渲染为
+
+```html
+<Col span="12">
+  <FormItem style="padding: 0 20px;">
+    <Input/>
+  </FormItem>
+</Col>
+```

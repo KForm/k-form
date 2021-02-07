@@ -71,10 +71,14 @@ export default {
   },
   render(h) {
     const { $tooltip } = this.$props.ui
+    const layout = propExpressionWrap(this.$context, this.$inject, this.layout || this.schema.form.layout)
+    const gutter = layout.gutter ? {
+      padding: `0 ${layout.gutter}px`
+    } : {}
     return (
       !propExpressionWrap(this.$context, this.$inject, this.$props.hidden) ?
-        <i-col { ...{ props: propExpressionWrap(this.$context, this.$inject, this.layout || this.schema.form.layout) } } >
-          <form-item label = { propExpressionWrap(this.$context, this.$inject, this.label) } prop = { this.field } >
+        <i-col { ...{ props: layout } } >
+          <form-item label = { propExpressionWrap(this.$context, this.$inject, this.label) } prop = { this.field } style = { gutter } >
             { h(this.getFieldComponent(this.type), {
               attrs: {
                 value: this.$props.value,
