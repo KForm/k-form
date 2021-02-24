@@ -1,4 +1,4 @@
-import { TYPE } from '../../../core/types'
+import { TYPE } from '../../../package/view-design/types'
 import { isFunction, isBoolean } from '../../../core/utils'
 import { translateId2Name } from '../../../core/transfer'
 

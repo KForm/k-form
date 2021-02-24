@@ -1,4 +1,4 @@
-import { TYPE } from '../../../core/types'
+import { TYPE } from '../../../package/view-design/types'
 import KeepFeUpload from '@keepfe/plugin-upload'
 import './style.less'
 import appConfig from '_app/config'

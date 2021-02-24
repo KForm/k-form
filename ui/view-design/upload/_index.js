@@ -1,4 +1,4 @@
-import { TYPE } from '../../../core/types'
+import { TYPE } from '../../../package/view-design/types'
 import Upload from '@vuecore/uiLayouts/iview-admin/components/upload'
 
 export default {

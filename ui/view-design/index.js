@@ -14,7 +14,7 @@ import ColorPicker from './color-picker/index'
 import Widget from './widget'
 import Cascader from './cascader'
 import Upload from './upload'
-import { TYPE } from '../../core/types'
+import { TYPE } from '../../package/view-design/types'
 
 export default {
   [TYPE.INPUT]: Input,

@@ -1,70 +1,19 @@
-import BaseForm from '../form'
-import Field from '../../package/view-design/field'
-import { mapSchemaRules2UI, isNull, isBoolean, hasMatched, deepClone, isObject, isArray , isFunction, findIndexOfandCheck } from '../utils'
-import { _schema, _editable, _layout } from '../config'
+import BaseForm from '../../core/form'
+import extendForm from '../../core/component/form'
+import Field from './field'
+import { isNull, isBoolean, hasMatched, isObject, isArray , isFunction } from '../../core/utils'
+import { _editable } from '../../core/config'
+import '../../index.less'
+import '../../ui/view-design/style.less'
 
 let kf = new BaseForm()
 
 const CARD_STYLE = 'display: table; width: 100%; margin-bottom: 15px;'
 
 export default {
+  extends:extendForm,
   components: {
     Field
-  },
-  props: {
-    model: {
-      type: Object,
-      default: () => ({})
-    },
-    value: { // schema 
-      type: Object,
-      default: () => _schema
-    },
-    rules: {
-      type: Object,
-      default: () => ({})
-    },
-    ui: {
-      type: Object,
-      default: () => ({})
-    },
-    layout: {
-      type: Object,
-      default: () => _layout
-    },
-    editable: {
-      type: Boolean,
-      default: _editable
-    },
-  },
-  computed: {
-    formRules() {
-      return mapSchemaRules2UI(this, this.schema.form, this.schema.fields)
-    },
-    schema() {
-      return this.value
-    }
-  },
-  provide() {
-    return {
-      formHanlder: (field, e, ref, groupName) => {
-        if(groupName && ref.indexOf('-') > -1) {
-          let index = ref.substring(ref.indexOf('-') + 1, ref.length)
-          this.model[groupName][index][field] = e
-        }
-        else if(groupName && ref.indexOf('.') > -1) {
-          this.model[groupName][field] = e
-        }
-        else {
-          this.model[field] = e
-          return
-        }
-      },
-      $context: this.$parent,
-      $inject: (this.schema.form || {}).inject,
-      deleteField: this.deleteField,
-      updateField: this.updateField
-    }
   },
   methods: {
     renderFooter(field, h, uk = 'ui') {
@@ -165,15 +114,6 @@ export default {
         }
       })
     },
-    $field(field) {
-      return this.$refs[field]
-    },
-    $iview(field) {
-      return this.$field(field).$iview()
-    },
-    $form() {
-      return this.$refs[kf.refName]
-    },
     refactorFields(field, info) {
       let fields = this.value.fields
       const refactorField = (field, item, info) => {
@@ -222,90 +162,6 @@ export default {
         after = refactorField(field, item, info)
         return after
       })
-    },
-    deleteField(index) {
-      return new Promise((resolve, reject) => {
-        this.$nextTick(() => {
-          let fields = this.value.fields
-          if(isArray(index)) {
-            index.forEach((item,index) => {
-              let resIndex = findIndexOfandCheck(item, fields, index)
-              if(resIndex === undefined) return
-              if(typeof resIndex === 'string') {
-                let idx = resIndex.split('.')
-                fields[idx[0]].fields.splice(idx[1], 1)
-              }
-              else {
-                fields.splice(resIndex, 1)
-              }
-              
-            })
-          }
-          else {
-            let resIndex = findIndexOfandCheck(index, fields)
-            if(resIndex === undefined) return
-            if(typeof resIndex === 'string') {
-              let idx = resIndex.split('.')
-              fields[idx[0]].fields.splice(idx[1], 1)
-            }
-            else {
-              fields.splice(resIndex, 1)
-            }
-          }
-          this.changeFields(fields)
-          resolve(fields)
-        })
-      })
-    },
-    insertField(info, index) {
-      return new Promise((resolve, reject) => {
-        this.$nextTick(() => {
-          let insertItem = []
-          if(isArray(info)) {
-            insertItem = [...info]
-          }
-          else if (isObject(info)) {
-            insertItem = [info]
-          }
-          else {
-            console.error(`${info} 请插入Object或Array类型的数据`)
-          }
-          let fields = this.value.fields
-          let resIndex = fields.length
-          resIndex = findIndexOfandCheck(index, fields)
-          if(resIndex === undefined) return
-          if(typeof resIndex === 'string') {
-            let idx = resIndex.split('.')
-            fields[idx[0]].fields.splice(idx[1], 0, ...insertItem)
-          }
-          else {
-            fields.splice(resIndex, 0, ...insertItem)
-          }
-          this.changeFields(fields)
-          resolve(fields)
-        })
-      })
-    },
-    updateField(field, info) {
-      return new Promise((resolve, reject) => {
-        this.$nextTick(() => {
-          let fields = this.refactorFields(field, info)
-          this.changeFields(fields)
-          resolve(fields)
-        })
-      })
-    },
-    updateForm(option) {
-      return new Promise((resolve, reject) => {
-        this.$nextTick(() => {
-          let form = Object.assign(deepClone(this.value.form), option)
-          this.$emit('input', { form, fields: this.value.fields })
-          resolve(form)
-        })
-      })
-    },
-    changeFields(fields) {
-      this.$emit('input', { form: this.value.form, fields: fields })
     }
   },
   render(h) {

@@ -1,4 +1,4 @@
-import { TYPE } from '../../../core/types'
+import { TYPE } from '../../../package/view-design/types'
 import { isFunction, isObject } from '../../../core/utils'
 import { translateId2Name, translateId2NameByGroup } from '../../../core/transfer'
 export default {
