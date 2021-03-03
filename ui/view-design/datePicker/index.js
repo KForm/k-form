@@ -1,6 +1,6 @@
 import { TYPE } from '../../../package/view-design/types'
 import Kmoment from '../../../core/kmoment'
-
+import { DatePicker } from 'view-design'
 export default {
   name: TYPE.DATE_PICKER,
   inheritAttrs: false,

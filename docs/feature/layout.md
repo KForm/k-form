@@ -6,6 +6,7 @@
 
 从左到右，从上往下依次陈列各表单项，较简单
 
+
 ```jsx
 <k-form :model="{
   a: '',
@@ -46,12 +47,15 @@ export default {
 ### 复杂布局
 
 将 schema.fields[n] 包裹一层，提供了 ui、subui、field、type、fields 字段
+属性 | 说明 | vant 和 iview 区别 |  
+----|-----|------|------ 
+ui | 传入属性和插槽，同 `schema.fields[n].ui`。 属性、$slots、$footer(`function`、`component` 属性用来渲染卡片底部试图)| iview属性参考`iview.Card`；  vant支持：`title`
+field| 同 `schema.fields[n].field`，分组的 field，组内所有字段将绑定到这个组 field 对象内 | 无
+type | 可选 `'object'`、`array`、`card`，布局的类型，可选分组模式、列表模式、卡片模式 | 无 
+fields |字段配置项，同 `schema.fields` | 无 
+subui |`array` 模式下生效，可配置每一列表项的卡片属性 | 无 
 
-* ui：支持 `iview.Card` 的所有属性和插槽，同 `schema.fields[n].ui`，新增 $footer（`function`、`component`） 属性用来渲染卡片底部视图
-* field：同 `schema.fields[n].field`，分组的 field，组内所有字段将绑定到这个组 field 对象内
-* type：可选 `'object'`、`array`、`card`，布局的类型，可选分组模式、列表模式、卡片模式
-* fields：字段配置项，同 `schema.fields`
-* subui: `array` 模式下生效，可配置每一列表项的卡片属性
+
 
 #### 分组布局
 

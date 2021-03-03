@@ -163,7 +163,6 @@ export const findIndexOfandCheck = (index, fields, num = 0) => {
       console.error(`未找到 field 为 ${index} 的表单项`)
       return
     }
-    console.log(temp)
     // let temp = fields.findIndex(item => item.field === target)
     if(temp > -1) {
       resIndex = temp

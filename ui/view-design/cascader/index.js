@@ -1,4 +1,5 @@
 import { TYPE } from '../../../package/view-design/types'
+import { Cascader } from 'view-design'
 export default {
   name: TYPE.CASCADER,
   inheritAttrs: false,

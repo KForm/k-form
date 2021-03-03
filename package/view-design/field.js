@@ -1,8 +1,22 @@
-import field from '../../core/component/field'
+import { Col, FormItem, Tooltip, Icon } from 'view-design'
+import extendField from '../../core/component/field'
+import { TYPE } from '../../package/view-design/types'
+import components from '../../ui/view-design'
 import { slotsWrap, propExpressionWrap, isObject } from '../../core/utils'
 import './style/field.less'
 export default {
-  extends:field,
+  extends:extendField,
+  props: {
+    type: {
+      type: String,
+      default: TYPE.TEXT
+    }
+  },
+  methods:{
+    getFieldComponent(type) {
+      return components[type]
+    }
+  },
   render(h) {
     const { $tooltip } = this.$props.ui
     const layout = propExpressionWrap(this.$context, this.$inject, this.layout || this.schema.form.layout)
@@ -11,8 +25,8 @@ export default {
     } : {}
     return (
       !propExpressionWrap(this.$context, this.$inject, this.$props.hidden) ?
-        <i-col { ...{ props: layout } } >
-          <form-item label = { propExpressionWrap(this.$context, this.$inject, this.label) } prop = { this.field } style = { gutter } >
+        <Col { ...{ props: layout } } >
+          <FormItem label = { propExpressionWrap(this.$context, this.$inject, this.label) } prop = { this.field } style = { gutter } >
             { h(this.getFieldComponent(this.type), {
               attrs: {
                 value: this.$props.value,
@@ -49,8 +63,8 @@ export default {
                     <Icon type="md-information-circle" />
                   </Tooltip> : null
             }
-          </form-item>
-        </i-col> : null
+          </FormItem>
+        </Col> : null
     )
   }
 }

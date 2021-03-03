@@ -1,13 +1,10 @@
-import BaseForm from '../../core/form'
+import { Card, Form } from 'view-design'
 import extendForm from '../../core/component/form'
 import Field from './field'
 import { isNull, isBoolean, hasMatched, isObject, isArray , isFunction } from '../../core/utils'
 import { _editable } from '../../core/config'
 import '../../index.less'
 import '../../ui/view-design/style.less'
-
-let kf = new BaseForm()
-
 const CARD_STYLE = 'display: table; width: 100%; margin-bottom: 15px;'
 
 export default {
@@ -113,55 +110,6 @@ export default {
           )
         }
       })
-    },
-    refactorFields(field, info) {
-      let fields = this.value.fields
-      const refactorField = (field, item, info) => {
-        switch(item.type) {
-          case 'array':
-          case 'object': {
-            let scope = field.split('.')
-            if(scope.length > 1) {
-              if(item.fields) {
-                let name = scope[1]
-                let key = scope[0]
-                if(key === item.field) {
-                  let rawIndex = item.fields.findIndex(v => v.field === name)
-                  item.fields[rawIndex] = { ...item.fields[rawIndex], ...info }
-                  return item
-                }
-              }
-            }
-            break
-          }
-          case 'card': {
-            if(item.fields) {
-              let rawIndex = item.fields.findIndex(v => v.field === field)
-              rawIndex > -1 && (item.fields[rawIndex] = { ...item.fields[rawIndex], ...info })
-              return item
-            }
-            break
-          }
-          default: {
-            if(item.field === field) return Object.assign(item, info)
-          }
-        }
-        return item
-      }
-      if(isObject(field)) {
-        return fields.map(item => {
-          let obj = {}
-          for(let key in field) {
-            obj = refactorField(key, item, field[key])
-          }
-          return obj
-        })
-      }
-      return fields.map(item => {
-        let after = item
-        after = refactorField(field, item, info)
-        return after
-      })
     }
   },
   render(h) {
@@ -174,7 +122,7 @@ export default {
     }
     return (
       <div class="k-form">
-        <Form ref={ kf.refName } { ...{ props: nativeProps } } >
+        <Form ref={ this.kf.refName } { ...{ props: nativeProps } } >
           { this.renderField(this.schema.form || {}, this.schema.fields || [], h, undefined, undefined, this.model) }
           { this.$slots.default }
         </Form>

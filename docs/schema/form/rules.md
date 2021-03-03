@@ -16,7 +16,7 @@ export default {
           rules: {
             name: {
               required: true,
-              message: '请输入姓名
+              message: '请输入姓名'
             }
           }
         }

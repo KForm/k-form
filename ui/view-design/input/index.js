@@ -1,5 +1,5 @@
 import { TYPE } from '../../../package/view-design/types'
-
+import { Input } from 'view-design'
 export default {
   name: TYPE.INPUT,
   inheritAttrs: false,

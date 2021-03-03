@@ -5,7 +5,8 @@
 ### 引入
 
 ```js
-import KForm from 'k-form'
+import KeepForm from 'k-form'
+const KForm = new KeepForm()
 export default {
   components: {
     KField: KForm.Field

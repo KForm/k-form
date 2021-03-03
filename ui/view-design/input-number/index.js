@@ -1,4 +1,5 @@
 import { TYPE } from '../../../package/view-design/types'
+import { InputNumber } from 'view-design'
 
 export default {
   name: TYPE.INPUT_NUMBER,

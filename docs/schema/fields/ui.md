@@ -4,11 +4,12 @@
 
 ### 属性
 
-兼容 iview 任意表单组件的所有属性，以 `iview.Input` 为例：
+兼容 iview 或者 vant 任意表单组件的所有属性，以 `iview.Input` 为例：
 
 ```jsx
 <k-form  :model="form" v-model="schema" />
 ```
+iview
 
 ```js
 export default {
@@ -32,6 +33,7 @@ export default {
 ```jsx
 <Input placeholder="请输入姓名" size="large" />
 ```
+
 
 ### 事件 $on
 
@@ -188,7 +190,7 @@ export default {
 <Input class="my-input" />
 ```
 
-### 提醒信息 $tooltip
+### 提醒信息 $tooltip （Vant 不支持）
 
 在字段后方追加 `iview.Tootip` 组件用来解释字段含义，支持 `String` 类型和 `Object` 类型
 

@@ -1,6 +1,8 @@
 import { TYPE } from '../../../package/view-design/types'
 import { isFunction, isObject } from '../../../core/utils'
 import { translateId2Name, translateId2NameByGroup } from '../../../core/transfer'
+import { Select, OptionGroup, Option } from 'view-design'
+
 export default {
   name: TYPE.SELECT,
   inheritAttrs: false,

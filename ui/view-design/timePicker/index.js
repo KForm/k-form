@@ -1,4 +1,5 @@
 import { TYPE } from '../../../package/view-design/types'
+import { TimePicker } from 'view-design'
 
 export default {
   name: TYPE.TIME_PICKER,

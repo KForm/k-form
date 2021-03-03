@@ -1,5 +1,6 @@
 import { TYPE } from '../../../package/view-design/types'
 import { translateId2Name } from '../../../core/transfer'
+import { RadioGroup, Radio } from 'view-design'
 
 export default {
   name: TYPE.RADIO,

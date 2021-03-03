@@ -1,6 +1,6 @@
 # 组件实例
 
-有时候我们需要获取 KField 组件来调用一些 api 操作，甚至需要获取到更深层次的 iview 组件的实例，比如调用 `iview.Input` 的 focus 方法实现自动聚焦。
+有时候我们需要获取 KField 组件来调用一些 api 操作，甚至需要获取到更深层次的 ui 组件的实例，比如调用 `iview.Input` 的 focus 方法实现自动聚焦。
 
 
 ### 获取 KField 实例
@@ -75,8 +75,8 @@ export default {
   }
   mounted() {
     // 获取到 i-input
-    this.$refs.form.$field('name').iview().focus()
-    this.$refs.form.$iview('name').focus()
+    this.$refs.form.$field('name').$ui().focus()
+    this.$refs.form.$ui('name').focus()
   }
 }
 ```
@@ -93,7 +93,7 @@ export default {
 export default {
   mounted() {
     // 获取到 i-input
-    this.$refs.name.$iview().focus()
+    this.$refs.name.$ui().focus()
   }
 }
 ```
@@ -129,8 +129,8 @@ export default {
   },
   mounted() {
     console.log(this.$refs.form.$field('a.a1'))
-    this.$refs.form.$field('a.a1').iview().focus()
-    this.$refs.form.$iview('a.a1').focus()
+    this.$refs.form.$field('a.a1').$ui().focus()
+    this.$refs.form.$ui('a.a1').focus()
   }
 }
 ```
@@ -168,8 +168,8 @@ export default {
   mounted() {
     // 获取列表中的第二组的 a1 字段
     console.log(this.$refs.form.$field('a.a1-1'))
-    this.$refs.form.$field('a.a1-1').iview().focus()
-    this.$refs.form.$iview('a.a1-1').focus()
+    this.$refs.form.$field('a.a1-1').$ui().focus()
+    this.$refs.form.$ui('a.a1-1').focus()
   }
 }
 ```

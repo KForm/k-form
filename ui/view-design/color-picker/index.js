@@ -1,5 +1,5 @@
 import { TYPE } from '../../../package/view-design/types'
-
+import { ColorPicker } from 'view-design'
 export default {
   name: TYPE.COLOR_PICKER,
   inheritAttrs: false,

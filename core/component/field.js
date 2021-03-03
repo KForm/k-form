@@ -1,14 +1,6 @@
-import { TYPE } from '../../package/view-design/types'
-import components from '../../ui/view-design'
 import { _layout, _editable } from '../config'
-
-
 export default {
   props: {
-    type: {
-      type: String,
-      default: TYPE.TEXT
-    },
     field: {
       type: String,
       default: '',
@@ -55,10 +47,7 @@ export default {
   },
   inject: ['$context', '$inject', 'formHanlder', 'deleteField', 'updateField'],
   methods: {
-    getFieldComponent(type) {
-      return components[type]
-    },
-    $iview(){
+    $ui(){
       return this.$refs[`K-${this.field}`].$refs[this.field]
     },
     delete(){

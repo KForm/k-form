@@ -1,5 +1,6 @@
 import { TYPE } from '../../../package/view-design/types'
 import { isBoolean } from '../../../core/utils'
+import { Switch } from 'view-design'
 
 export default {
   name: TYPE.SWITCH,
@@ -7,13 +8,13 @@ export default {
   render(h) {
     const { editable, slots, value, _formatter } = this.$attrs
     return (
-      editable ? <i-switch {...{ props: this.$attrs, on: this.$listeners}}>
+      editable ? <Switch {...{ props: this.$attrs, on: this.$listeners}}>
         { Object.keys(slots).map(item => (
           <template slot = { slots[item].name } >
             { slots[item].render(h) }
           </template>
         )) }
-      </i-switch> : <p>{ _formatter || (isBoolean(value) ? value ? '是' : '否' : '') }</p>
+      </Switch> : <p>{ _formatter || (isBoolean(value) ? value ? '是' : '否' : '') }</p>
     )
   }
 }

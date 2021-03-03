@@ -3,7 +3,7 @@ import KeepFeUpload from '@keepfe/plugin-upload'
 import './style.less'
 import appConfig from '_app/config'
 import Cookies from 'js-cookie'
-import { Message } from 'view-design'
+import { Message, Button, Icon, Table } from 'view-design'
 
 export default {
   name: TYPE.UPLOAD,

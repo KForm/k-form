@@ -1,4 +1,5 @@
 import { TYPE } from '../../../package/view-design/types'
+import { AutoComplete } from 'view-design'
 
 export default {
   name: TYPE.AUTO_COMPLETE,
