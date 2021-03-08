@@ -3,7 +3,7 @@ import { TYPE } from '../../../package/vant/types'
 import { FormItem } from '@keepfe/plugin-vant-ui/lib/vant-ui.min.js'
 import {Cell} from 'vant'
 export default {
-  name: TYPE.DATE_PICKER,
+  name: 'k-' + TYPE.DATE_PICKER,
   inheritAttrs: false,
   render(h){
     const { editable, field, slots, value, type, $data, label} = this.$attrs

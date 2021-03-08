@@ -2,7 +2,7 @@ import { TYPE } from '../../../package/view-design/types'
 import { Rate } from 'view-design'
 
 export default {
-  name: TYPE.RATE,
+  name: 'k-' + TYPE.RATE,
   inheritAttrs: false,
   render(h) {
     const { editable, disabled, slots } = this.$attrs

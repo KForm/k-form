@@ -3,7 +3,7 @@ import { translateId2Name } from '../../../core/transfer'
 import { RadioGroup, Radio } from 'view-design'
 
 export default {
-  name: TYPE.RADIO,
+  name: 'k-' + TYPE.RADIO,
   inheritAttrs: false,
   render(h) {
     const { $data, value, editable, _formatter } = this.$attrs

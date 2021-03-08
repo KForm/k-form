@@ -2,7 +2,7 @@ import { TYPE } from '../../../package/view-design/types'
 import { InputNumber } from 'view-design'
 
 export default {
-  name: TYPE.INPUT_NUMBER,
+  name: 'k-' + TYPE.INPUT_NUMBER,
   inheritAttrs: false,
   render(h) {
     const { editable, value, _formatter } = this.$attrs

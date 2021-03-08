@@ -4,7 +4,7 @@ import { translateId2Name, translateId2NameByGroup } from '../../../core/transfe
 import { Select, OptionGroup, Option } from 'view-design'
 
 export default {
-  name: TYPE.SELECT,
+  name: 'k-' + TYPE.SELECT,
   inheritAttrs: false,
   methods: {
     renderOptions(option) {

@@ -1,7 +1,7 @@
 import { TYPE } from '../../../package/view-design/types'
 import { Input } from 'view-design'
 export default {
-  name: TYPE.INPUT,
+  name: 'k-' + TYPE.INPUT,
   inheritAttrs: false,
   render(h) {
     const { editable, field, slots, value, _formatter } = this.$attrs

@@ -4,7 +4,7 @@ import { FormItem } from '@keepfe/plugin-vant-ui/lib/vant-ui.min.js'
 import { Cell } from 'vant'
 import { translateId2Name } from '../../../core/transfer'
 export default {
-  name: TYPE.PICKER,
+  name: 'k-' + TYPE.PICKER,
   inheritAttrs: false,
   render(h){
     const { editable, field, slots, value, type, $data, label, _formatter } = this.$attrs

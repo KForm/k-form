@@ -2,7 +2,7 @@
 import { TYPE } from '../../../package/vant/types'
 import { FormItem } from '@keepfe/plugin-vant-ui/lib/vant-ui.min.js'
 export default {
-  name: TYPE.UPLOAD,
+  name: 'k-' + TYPE.UPLOAD,
   inheritAttrs: false,
   render(h){
     const { editable, field, slots, type, $data,disabled} = this.$attrs

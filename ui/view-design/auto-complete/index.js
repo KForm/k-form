@@ -2,7 +2,7 @@ import { TYPE } from '../../../package/view-design/types'
 import { AutoComplete } from 'view-design'
 
 export default {
-  name: TYPE.AUTO_COMPLETE,
+  name: `k-${TYPE.AUTO_COMPLETE}`,
   inheritAttrs: false,
   render(h) {
     const { editable, slots, value, _formatter } = this.$attrs

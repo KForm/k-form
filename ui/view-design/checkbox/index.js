@@ -3,7 +3,7 @@ import { isFunction, isBoolean } from '../../../core/utils'
 import { translateId2Name } from '../../../core/transfer'
 import { CheckboxGroup, Checkbox } from 'view-design'
 export default {
-  name: TYPE.CHECKBOX,
+  name: 'k-' + TYPE.CHECKBOX,
   inheritAttrs: false,
   render(h) {
     const { $data, value, editable, slots, _formatter } = this.$attrs

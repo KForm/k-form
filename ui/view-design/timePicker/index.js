@@ -2,7 +2,7 @@ import { TYPE } from '../../../package/view-design/types'
 import { TimePicker } from 'view-design'
 
 export default {
-  name: TYPE.TIME_PICKER,
+  name: 'k-' + TYPE.TIME_PICKER,
   inheritAttrs: false,
   render(h) {
     const { value, editable, _formatter } = this.$attrs

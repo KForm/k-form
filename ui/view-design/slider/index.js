@@ -2,7 +2,7 @@ import { TYPE } from '../../../package/view-design/types'
 import { Slider } from 'view-design'
 
 export default {
-  name: TYPE.SLIDER,
+  name: 'k-' + TYPE.SLIDER,
   inheritAttrs: false,
   render(h) {
     const { editable, range, value, _formatter } = this.$attrs

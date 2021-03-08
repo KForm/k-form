@@ -1,7 +1,7 @@
 import { TYPE } from '../../../package/view-design/types'
 import { Cascader } from 'view-design'
 export default {
-  name: TYPE.CASCADER,
+  name: 'k-' + TYPE.CASCADER,
   inheritAttrs: false,
   computed: {
     filterData() {

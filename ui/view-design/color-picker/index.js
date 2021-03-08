@@ -1,7 +1,7 @@
 import { TYPE } from '../../../package/view-design/types'
 import { ColorPicker } from 'view-design'
 export default {
-  name: TYPE.COLOR_PICKER,
+  name: 'k-' + TYPE.COLOR_PICKER,
   inheritAttrs: false,
   render(h) {
     const { editable, value, _formatter } = this.$attrs

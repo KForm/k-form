@@ -3,7 +3,7 @@ import { isBoolean } from '../../../core/utils'
 import { Switch } from 'view-design'
 
 export default {
-  name: TYPE.SWITCH,
+  name: 'k-' + TYPE.SWITCH,
   inheritAttrs: false,
   render(h) {
     const { editable, slots, value, _formatter } = this.$attrs

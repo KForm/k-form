@@ -1,12 +1,16 @@
 import { TYPE } from '../../../package/view-design/types'
 import KeepFeUpload from '@keepfe/plugin-upload'
 import './style.less'
-import appConfig from '_app/config'
+// import config from '_app/config'
+import FeConfig from '@keepfe/plugin-configjs'
 import Cookies from 'js-cookie'
 import { Message, Button, Icon, Table } from 'view-design'
+import { isProd } from '../../../../_utils/env'
+
+const config = new FeConfig(isProd ? '' : 'pre', false, false)
 
 export default {
-  name: TYPE.UPLOAD,
+  name: 'k-' + TYPE.UPLOAD,
   inheritAttrs: false,
   data() {
     let columns = [
@@ -63,7 +67,7 @@ export default {
     handleChange(e, fs) {
       let HookMap = new Map()
       HookMap.set('validator', function(fileNode){})
-      const authorization = Cookies.get(appConfig.login.ldapCookie)[appConfig.hostEnv + 'LdapAuth']
+      const authorization = Cookies.get(config.login.ldapCookie)[config.hostEnv + 'LdapAuth']
       let self = this
       const files = fs || this.$refs.upload.files
       let valid = true
@@ -116,7 +120,7 @@ export default {
           'progress': function() { console.log(arguments) }
         },
         extendInfo: {
-          'namespace': appConfig.appName,
+          'namespace': config.appName,
           'user': this.$store.state._user.userName
         },
         request: {
