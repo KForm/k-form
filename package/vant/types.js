@@ -3,7 +3,7 @@ export const TYPE = {
   DATE_PICKER:'date-picker', 
   TIME_PICKER:'time-picker',
   UPLOAD: 'upload',
-  CUSTOM: 'custom',
+  WDIGET: 'widget',
   SELECT: 'select',
   RADIO: 'radio'
 }

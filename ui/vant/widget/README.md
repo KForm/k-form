@@ -18,7 +18,7 @@ default
 1. schema
 ```js
 [{
-  type:KForm.TYPE.CUSTOM,
+  type:KForm.TYPE.WIDGET,
   field:'birthday',
   label:'出生日期',
   ui:{
@@ -40,7 +40,7 @@ default
 ```vue
 <template>
   <Form>
-    <FormItem v-model="form.birthday" type="custom" label="出生日期" >
+    <FormItem v-model="form.birthday" type="widget" label="出生日期" >
       <Cell :value="form.birthday || '请选择出生日期'">
       <Calendar v-model="show" @confirm="handleConfirm">
       </Cell>

@@ -64,4 +64,4 @@ Vant
 * `KForm.TYPE.UPLOAD -> 'upload' -> vant-ui.upload`
 * `KForm.TYPE.SELECT -> 'select' -> vant.picker`
 * `KForm.TYPE.RADIO -> 'radio' -> Vant.Radio`
-* `KForm.TYPE.CUSTOM -> 'custom' -> 自定义组件`
+* `KForm.TYPE.WIDGET -> 'widget' -> 自定义组件`
