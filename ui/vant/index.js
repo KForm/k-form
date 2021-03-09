@@ -4,7 +4,7 @@ import Select from './select/index'
 import Upload from './upload/index'
 import DatePicker from './datepicker/index'
 import TimePicker from './timepicker/index'
-import Custom from './custom/index'
+import Widget from './widget/index'
 import { TYPE } from '../../package/vant/types'
 
 export default {
@@ -14,5 +14,5 @@ export default {
   [TYPE.UPLOAD]:Upload,
   [TYPE.DATE_PICKER]:DatePicker,
   [TYPE.TIME_PICKER]:TimePicker,
-  [TYPE.CUSTOM]:Custom
+  [TYPE.Widget]:Widget
 }
