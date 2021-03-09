@@ -14,5 +14,5 @@ export default {
   [TYPE.UPLOAD]:Upload,
   [TYPE.DATE_PICKER]:DatePicker,
   [TYPE.TIME_PICKER]:TimePicker,
-  [TYPE.Widget]:Widget
+  [TYPE.WIDGET]:Widget
 }

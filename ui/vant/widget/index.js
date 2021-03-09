@@ -7,7 +7,7 @@ export default {
   render(h){
     const { field, slots, type, $data } = this.$attrs
     return (
-      <FormItem {...{ props: this.$attrs, on: this.$listeners, ref: field}} data={ $data } k-type={ TYPE.WIDGET } >
+      <FormItem {...{ props: this.$attrs, on: this.$listeners, ref: field}} data={ $data } k-type='custom' >
         { 
           type === TYPE.WIDGET ? Object.keys(slots).map(item => (
             <template slot = { slots[item].name } >

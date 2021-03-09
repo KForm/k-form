@@ -8,7 +8,7 @@ export default {
       return (
         editable ? <FormItem {...{ props: props, on: on, ref: field}} k-type={ type } >
           { 
-            type === TYPE.CUSTOM ? Object.keys(slots).map(item => (
+            type === TYPE.WIDGET ? Object.keys(slots).map(item => (
               <template slot = { slots[item].name } >
                 { slots[item].render(_h) }
               </template>

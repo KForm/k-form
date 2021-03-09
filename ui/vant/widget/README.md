@@ -1,4 +1,4 @@
-### Custom 组件
+### Widget 组件
 本组件是基于 keepfe vant-ui组件进行开发，具体请查看 [vant-ui文档](https://phab.gotokeep.com/diffusion/NPMPKGVANTUI/browse/master/)
 
 支持嵌入其他组件类型
@@ -40,7 +40,7 @@ default
 ```vue
 <template>
   <Form>
-    <FormItem v-model="form.birthday" type="widget" label="出生日期" >
+    <FormItem v-model="form.birthday" type="custom" label="出生日期" >
       <Cell :value="form.birthday || '请选择出生日期'">
       <Calendar v-model="show" @confirm="handleConfirm">
       </Cell>

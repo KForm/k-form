@@ -11,7 +11,7 @@ export default {
     return (
       editable ? <FormItem {...{ props: this.$attrs, on: this.$listeners, ref: field}} data={ $data } k-type='picker' >
         { 
-          type === TYPE.CUSTOM ? Object.keys(slots).map(item => (
+          type === TYPE.WIDGET ? Object.keys(slots).map(item => (
             <template slot = { slots[item].name } >
               { slots[item].render(h) }
             </template>
